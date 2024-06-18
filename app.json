@@ -1,0 +1,13 @@
+{
+  "expo": {
+    "name": "KnowNow",
+    "slug": "know",
+    "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "9a19e668-893a-4e68-b806-23650b9b61d0"
+      }
+    },
+    "owner": "knownow"
+  }
+}
