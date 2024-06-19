@@ -8,6 +8,12 @@
         "projectId": "9a19e668-893a-4e68-b806-23650b9b61d0"
       }
     },
+    "orientation": "landscape",
+    "plugins" :[
+      ["expo-screen-orientation",{
+        "initialOrientation": "LANDSCAPE"
+      }]
+    ],
     "owner": "knownow"
   }
 }
