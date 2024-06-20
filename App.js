@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
@@ -6,17 +5,31 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import HomeScreen from './screens/Home.js'
 import AccountDashboard from './screens/AccountDashboard.js'
+import TopicSelection  from './screens/TopicSelection.js'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-
+const Tab = createBottomTabNavigator()
 const Stack = createNativeStackNavigator()
+
+
+function StackNav(){
+  return(
+       
+    <Stack.Navigator initialRouteName="QuestionsHome" screenOptions={{headerShown:false}}>
+      <Stack.Screen name="QuestionsHome" component={HomeScreen} />
+      <Stack.Screen name="TopicSelection" component={TopicSelection} />
+
+    </Stack.Navigator>
+  )
+}
 
 export default function App({navigation}) {
   return (
-    <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Account" component={AccountDashboard} />
-      </Stack.Navigator>
+    <NavigationContainer >
+      <Tab.Navigator screenOptions={{headerShown:false}}>
+        <Tab.Screen name="Home" component={StackNav} />
+        <Tab.Screen name="Account" component={AccountDashboard}/>
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
