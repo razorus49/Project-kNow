@@ -6,7 +6,8 @@ import {
     Button
   } from 'react-native';
 
-  
+
+//simple screen for testing purposes
 const AccountDashboard = ({navigation}) => {
     return(
         <View> 

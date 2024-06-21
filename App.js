@@ -14,17 +14,18 @@ const Stack = createNativeStackNavigator()
 
 function StackNav(){
   return(
-       
+    
+    //stack navigators allow screens to be pushed on top of each other (original screen is maintained by the program)
     <Stack.Navigator initialRouteName="QuestionsHome" screenOptions={{headerShown:false}}>
       <Stack.Screen name="QuestionsHome" component={HomeScreen} />
       <Stack.Screen name="TopicSelection" component={TopicSelection} />
-
     </Stack.Navigator>
   )
 }
 
 export default function App({navigation}) {
   return (
+    //creates navigation on the lower tab
     <NavigationContainer >
       <Tab.Navigator screenOptions={{headerShown:false}}>
         <Tab.Screen name="Home" component={StackNav} />
