@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home.js'
 import AccountDashboard from './screens/AccountDashboard.js'
 import TopicSelection  from './screens/TopicSelection.js'
+import Questions  from './screens/Questions.js'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator()
@@ -16,18 +17,20 @@ function StackNav(){
   return(
     
     //stack navigators allow screens to be pushed on top of each other (original screen is maintained by the program)
+
     <Stack.Navigator initialRouteName="QuestionsHome" screenOptions={{headerShown:false}}>
       <Stack.Screen name="QuestionsHome" component={HomeScreen} />
       <Stack.Screen name="TopicSelection" component={TopicSelection} />
+      <Stack.Screen name="Questions" component={Questions} />
     </Stack.Navigator>
-  )
+  );
 }
 
 export default function App({navigation}) {
   return (
     //creates navigation on the lower tab
     <NavigationContainer >
-      <Tab.Navigator screenOptions={{headerShown:false}}>
+      <Tab.Navigator screenOptions={{headerShown:false}} independent={true}>
         <Tab.Screen name="Home" component={StackNav} />
         <Tab.Screen name="Account" component={AccountDashboard}/>
       </Tab.Navigator>

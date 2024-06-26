@@ -5,7 +5,8 @@ import {
     SafeAreaView,
     StatusBar,
     FlatList,
-    TouchableOpacity
+    TouchableOpacity,
+    Button
   } from 'react-native';
 
 //dictionary of topic titles and description
@@ -20,7 +21,8 @@ const data=[
 const Item = ({item, onPress, backgroundColor, textColor, navigation, name}) => (
     <TouchableOpacity onPress={()=>
         {navigation.navigate('TopicSelection', {'topic': item.title}) //1st param: navigation screen, 2nd param: topic of the pressed component
-        console.log(item.title, 'is pressed')}} 
+        console.log(item.title, 'is pressed')
+        }} 
         style={[styles.item, {backgroundColor}]}
         key={item.key}>
       <Text style={[styles.title, {color: textColor}]}>{item.title}</Text>
@@ -59,6 +61,7 @@ const Home = ({navigation}) => {
             extraData={selectedId}
             horizontal={true}
         />
+        <Button title="to question" onPress={()=>navigation.navigate('Questions', {topic: "something"})}/>
         </SafeAreaView>
     );
 };

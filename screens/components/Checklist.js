@@ -1,6 +1,6 @@
 import { Text, SafeAreaView, StyleSheet, View} from 'react-native';
 import CheckBox from 'expo-checkbox';
-import React, {useState} from 'react';
+import React, {useEffect, useState, createContext} from 'react';
 
 const topics = {'Arithmetics': ["多位數", "分數的比較和加減", "分數除法及四則混合計算", "小數乘法", "小數除法及四則混合計算","小數和分數互化", "分數乘法"],
     "Geometry": [ '三角形', '四邊形的面積', '立體圖形', '體積', '多邊形的麵積', '符合棒形圖', '圓', '立體的截面', '圓面積', '角和度', '容量和體積', '圓形圖',"軸對稱", '折線圖', '圓周' ],
@@ -21,15 +21,16 @@ for (const [key,value] of Object.entries(topics)){
 }
 
 
+//individual part of the checklist with checkbox and subtopic name
+const SubtopicItem = ({subtopic, selected, id, onCheckboxPress}) =>{
 
-const SubtopicItem = ({subtopic, selected, id, toggleTopic}) =>{
 
     return(
         <View>
             <CheckBox
                 value={selected}
-                onValueChange={()=> toggleTopic(id)} />
-            <Text style={{ fontSize:20, textDecorationLine: selected ? 'underline' : 'none', backgroundColor: selected? '#adff2f' : 'none'  }}>
+                onValueChange={()=> onCheckboxPress(id)} />
+            <Text style={{ fontSize:20, textDecorationLine: selected ? 'underline' : 'none', backgroundColor: selected? '#adff2f' : '#ffffff'  }}>
                 {subtopic}
             </Text>
         </View>
@@ -37,10 +38,12 @@ const SubtopicItem = ({subtopic, selected, id, toggleTopic}) =>{
     )
 }
 
-
-const Checklist= ({topic}) => {
+const Checklist= ({topic, valueGetter}) => {
 
     const [subtopics, setTopics] = useState(d[topic])
+
+    useEffect(()=>{valueGetter(subtopics)
+    }, [subtopics, valueGetter])
 
     const toggleTopic = (id)=>{
       //subtopic would be dictionaries in the array, if the id is selected, copy the previous content and change the state of selection to the opposite boolean
@@ -48,12 +51,16 @@ const Checklist= ({topic}) => {
         const updatedSubtopics = subtopics.map((subtopic) =>
           subtopic.id === id ? { ...subtopic, selected: !subtopic.selected } : subtopic
         );
-        setTopics(updatedSubtopics);
-        
-  };
+        setTopics(updatedSubtopics)
+    }
     
 
+    const onCheckboxPress = async(id) => {
+        toggleTopic(id)
+    }
+    
     return(
+
         <View>
             {subtopics.map(subtopic => (
                 <SubtopicItem
@@ -61,10 +68,13 @@ const Checklist= ({topic}) => {
                     selected={subtopic.selected}
                     id={subtopic.id}
                     toggleTopic={toggleTopic}
+                    valueGetter= {valueGetter}
+                    onCheckboxPress={onCheckboxPress}
                 />
             ))}
         </View>
     )
 }
+
 
 export default Checklist

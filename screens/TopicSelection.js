@@ -2,25 +2,42 @@ import React, {useState} from 'react';
 import {
     StyleSheet,
     Text,
-    View,
+    ScrollView,
     Button,
-    TextInput
+
   } from 'react-native';
-import Checklist from "C:/Users/Illuminatus/projects/git/know-now/components/Checklist.js"
-
-
+import Checklist from './components/Checklist.js'
 //screen of topic selection
+
+
 const TopicSelection = ({route, navigation}) => {
     const {key, topic} = route.params //takes parameter of selected topic
+    console.log('topic in TS: ', topic)
 
-    //goal is to return a checklist corresponding to the selected topic
+    // const [subtopics, setSubtopics] = useState()
+
+
+    let subtopics
+    //callback function to retrieve values from checklist component
+    const getSubtopics =  (value) => {
+        subtopics= value
+        console.log(subtopics)
+    }
+
+    const onProceed = ()=>{
+        console.log('on proceed', subtopics)
+        navigation.navigate('Questions', {subtopicList: subtopics})
+    }
+
     return(
-        <View> 
+        <ScrollView> 
             <Text style={{fontSize:30}}> {topic} </Text>
-            <Checklist topic={topic}/>
+            <Checklist topic={topic} valueGetter={getSubtopics}/>
             <Button title="links to home"
             onPress={()=> navigation.goBack()}/>
-        </View>
+            <Button title="proceed"
+            onPress={()=> onProceed()}/>
+        </ScrollView>
     )
 };
 
