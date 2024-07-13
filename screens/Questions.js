@@ -7,27 +7,12 @@ import {
   } from 'react-native';
 import { useNavigation, useRoute, getParam } from '@react-navigation/native';
 import Question from './components/Question.js'
+import dummyQuestionsJSON from './questions.json' 
 
+console.log(dummyQuestionsJSON)
 //dummy questions for testing
-let dummyQuestions = [
-    {
-        question: 'Inside which HTML element do we put the JavaScript??',
-        options: ['<script>','<javascript>','<js>','<scripting>',],
-        answer: 1,
-    },
-    {
-        question: "What is the correct syntax for referring to an external script called 'xxx.js'?",
-        options:["<script href='xxx.js'>","<script name='xxx.js'>","<script src='xxx.js'>","<script file='xxx.js'>"],
-        answer: 3,
-    },
-    {
-        question: " How do you write 'Hello World' in an alert box?",
-        options:["msgBox('Hello World');","alertBox('Hello World');","msg('Hello World');","alert('Hello World');"],
-        answer: 4,
-    },
-];
 
-let quizLength = 3
+let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestionsJSON
 
 const Questions = ({route, navigation}) =>{
     const {subtopicList} = route.params

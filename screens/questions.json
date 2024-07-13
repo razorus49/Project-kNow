@@ -1,4 +1,4 @@
-{"questions":[
+{"dummyQuestionsJSON":[
     {
         "question": "Inside which HTML element do we put the JavaScript??",
         "options": ["<script>","<javascript>","<js>","<scripting>"],
