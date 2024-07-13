@@ -15,7 +15,7 @@ for (const [key,value] of Object.entries(topics)){
     //create intermediate array 
     let m=[]
     for(let i=0;i<value.length;++i){
-        m.push({'id':i, 'subtopic_text':value[i], 'selected':false})
+        m.push({id:i, subtopic_text:value[i], selected:false})
     }
     d[key]=m
 }
@@ -42,6 +42,7 @@ const Checklist= ({topic, valueGetter}) => {
 
     const [subtopics, setTopics] = useState(d[topic])
 
+    //useEffect hook invokes the getter function every time the value of subtopics changes
     useEffect(()=>{valueGetter(subtopics)
     }, [subtopics, valueGetter])
 
@@ -51,6 +52,8 @@ const Checklist= ({topic, valueGetter}) => {
         const updatedSubtopics = subtopics.map((subtopic) =>
           subtopic.id === id ? { ...subtopic, selected: !subtopic.selected } : subtopic
         );
+
+        //use the setTopics function to update the state (so it updates in real time)
         setTopics(updatedSubtopics)
     }
     

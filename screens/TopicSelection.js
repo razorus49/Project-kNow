@@ -12,7 +12,7 @@ import Checklist from './components/Checklist.js'
 
 const TopicSelection = ({route, navigation}) => {
     const {key, topic} = route.params //takes parameter of selected topic
-    console.log('topic in TS: ', topic)
+   
 
     // const [subtopics, setSubtopics] = useState()
 
@@ -24,10 +24,7 @@ const TopicSelection = ({route, navigation}) => {
         console.log(subtopics)
     }
 
-    const onProceed = ()=>{
-        console.log('on proceed', subtopics)
-        navigation.navigate('Questions', {subtopicList: subtopics})
-    }
+
 
     return(
         <ScrollView> 
@@ -36,7 +33,7 @@ const TopicSelection = ({route, navigation}) => {
             <Button title="links to home"
             onPress={()=> navigation.goBack()}/>
             <Button title="proceed"
-            onPress={()=> onProceed()}/>
+            onPress={()=> navigation.navigate('Questions', {subtopicList: subtopics})}/>
         </ScrollView>
     )
 };
