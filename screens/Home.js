@@ -21,7 +21,6 @@ const data=[
 const Item = ({item, onPress, backgroundColor, textColor, navigation, name}) => (
     <TouchableOpacity onPress={()=>
         {navigation.navigate('TopicSelection', {'topic': item.title}) //1st param: navigation screen, 2nd param: topic of the pressed component
-        console.log(item.title, 'is pressed')
         }} 
         style={[styles.item, {backgroundColor}]}
         key={item.key}>

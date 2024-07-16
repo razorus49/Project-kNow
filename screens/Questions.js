@@ -30,9 +30,12 @@ const Questions = ({route, navigation}) =>{
     //can update questions in real time by changing state
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [score, setScore] = useState(0)
-    const [quizCompleted, setQuizCompleted] = useState(false);
-    const [next, setNext] = useState(false)
+    const [selected, setSelected] = useState(null)
 
+    const onSelect = (id) => {
+       setSelected(id)
+       console.log(id)
+    }
     const handleAnswer = (answer) => {
         console.log('handle answer triggered, option is', answer)
         const isCorrect = answer === dummyQuestions[currentQuestion].answer
@@ -49,19 +52,23 @@ const Questions = ({route, navigation}) =>{
         }
         else{
             console.log('quiz is over')
+            navigation.goBack()
+            navigation.goBack()
+            //go back to home page when quiz is over
         }
-        }
+    }
 
    
     return(
         <View>
-        <Text style={{fontSize:20}}> {JSON.stringify(selected_subtopics)} </Text>
-        <Text>questions screen</Text>
-        {/* <Question question={" How do you write 'Hello World' in an alert box?"}
-         options={["msgBox('Hello World');","alertBox('Hello World');","msg('Hello World');","alert('Hello World');"]} /> */}
-        <Question question={dummyQuestions[currentQuestion].question} options={dummyQuestions[currentQuestion].options} handleAnswer={handleAnswer}/>
-        <Text>score: {score}</Text>
-        <Button title="go back" onPress={()=> navigation.goBack()}/>
+            <Text style={{fontSize:20}}> {JSON.stringify(selected_subtopics)} </Text>
+            <Text>questions screen</Text>
+
+            <Question question={dummyQuestions[currentQuestion].question} options={dummyQuestions[currentQuestion].options} selected={selected} onSelect={onSelect}/>
+            <Text>score: {score}</Text>
+            <Button title="next question" onPress={()=>handleAnswer(selected)}/>
+            <Button title="go back" onPress={()=> navigation.goBack()}/>
+        
         </View>
     )        
 }
