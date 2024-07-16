@@ -61,7 +61,7 @@ const Home = ({navigation}) => {
             extraData={selectedId}
             horizontal={true}
         />
-        <Button title="to question" onPress={()=>navigation.navigate('Questions', {topic: "something"})}/>
+
         </SafeAreaView>
     );
 };

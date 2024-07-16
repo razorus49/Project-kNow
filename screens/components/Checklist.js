@@ -22,9 +22,7 @@ for (const [key,value] of Object.entries(topics)){
 
 
 //individual part of the checklist with checkbox and subtopic name
-const SubtopicItem = ({subtopic, selected, id, onCheckboxPress}) =>{
-
-
+const SubtopicItem = ({subtopic, selected, id, onCheckboxPress, key}) =>{
     return(
         <View>
             <CheckBox
@@ -65,7 +63,7 @@ const Checklist= ({topic, valueGetter}) => {
     return(
 
         <View>
-            {subtopics.map(subtopic => (
+            {subtopics.map((subtopic, index) => (
                 <SubtopicItem
                     subtopic = {subtopic.subtopic_text}
                     selected={subtopic.selected}
@@ -73,6 +71,7 @@ const Checklist= ({topic, valueGetter}) => {
                     toggleTopic={toggleTopic}
                     valueGetter= {valueGetter}
                     onCheckboxPress={onCheckboxPress}
+                    key={index}
                 />
             ))}
         </View>

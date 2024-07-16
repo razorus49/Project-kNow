@@ -50,8 +50,7 @@ const Questions = ({route, navigation}) =>{
         else{
             console.log('quiz is over')
         }
-
-    }
+        }
 
    
     return(

@@ -1,21 +1,70 @@
-import { Text, StyleSheet, Button, View} from 'react-native';
+import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState, createContext} from 'react';
+import OptionList from './OptionList';
+
+
+//style={{color: selected? '#44B0F2' : '#b191ef' }}
+const Options = ({text, id, selected, onSelect}) => (
+    <View >
+      <TouchableOpacity style={styles.item} onPress={()=> onSelect(id)}>
+        <Text style={{color: selected? '#44B0F2' : '#b191ef' }}> {text}</Text>
+      </TouchableOpacity>
+    </View>
+  )
+
+  //example of options  [{"id": 0, "text": "<script>"}, {"id": 1, "text": "<javascript>"}, {"id": 2, "text": "<js>"}, {"id": 3, "text": "<scripting>"}]
 
 const Question = ({question, options, handleAnswer}) => {
 
-    //react child component cannot receive object so properties are passed independently (for question and options)
-    //somehow the parameters become objects? 
+    //put options into a dictionary that can be better utilised with id
+    let optionsDic = []
+    for (let i=0;i<options.length;++i){
+        optionsDic.push({text:options[i], id: i})
+    }
+    console.log(optionsDic)
+
+    //state needs to be in the parent component which would otherwise trigger 
+    // Cannot update a component while rendering a different component warning
+    const [selected, setSelected] = useState(null)
+
+    const onSelect = (id) => {
+       setSelected(id)
+       console.log(id)
+    }
+    console.log(optionsDic[0].id)
+
     return (
         <View>
-
-
             <Text> question component</Text>
             <Text>{JSON.stringify(question)}</Text>
-            {options.map((option, index)=> (
-                <Button key={index} title={option} onPress={()=> handleAnswer(index+1) }/>
-            ))}
+            {/* <OptionList options={optionsDic} selected={selected} onSelect={onSelect}/> */}
+                <FlatList 
+                    data={optionsDic}
+                    renderItem={({item}) => 
+                        (<Options 
+                        text={item.text}
+                        id={item.id}
+                        selected={item.id===selected}
+                        onSelect={onSelect}
+                        />)}
+                    keyExtractor={(item, index) => item.id}
+                />
+
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+
+    item: {
+      backgroundColor: '#f9c2ff',
+      padding: 10,
+      marginVertical: 5,
+      marginHorizontal: 1,
+    },
+    title: {
+      fontSize: 32,
+    },
+  });
 
 export default Question

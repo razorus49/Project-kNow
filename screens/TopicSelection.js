@@ -16,14 +16,12 @@ const TopicSelection = ({route, navigation}) => {
 
     // const [subtopics, setSubtopics] = useState()
 
-
     let subtopics
     //callback function to retrieve values from checklist component
     const getSubtopics =  (value) => {
         subtopics= value
         console.log(subtopics)
     }
-
 
 
     return(
