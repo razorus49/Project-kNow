@@ -11,7 +11,7 @@ import {
 const AccountDashboard = ({navigation}) => {
     return(
         <View> 
-            <Text style={{font:50}}> Account Dashboard in git folder </Text>
+            <Text style={{fontSize:30}}> Account Dashboard </Text>
             <Button title="links to home"
             onPress={()=> navigation.navigate('Home')}/>
         </View>

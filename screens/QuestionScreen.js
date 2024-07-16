@@ -9,7 +9,6 @@ import { useNavigation, useRoute, getParam } from '@react-navigation/native';
 import Question from './components/Question.js'
 import dummyQuestionsJSON from './questions.json' 
 
-console.log(dummyQuestionsJSON)
 //dummy questions for testing
 
 let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestionsJSON
@@ -36,13 +35,19 @@ const Questions = ({route, navigation}) =>{
        setSelected(id)
        console.log(id)
     }
+
     const handleAnswer = (answer) => {
-        console.log('handle answer triggered, option is', answer)
+
         const isCorrect = answer === dummyQuestions[currentQuestion].answer
 
+        //uses another variable x because the state of score updates 
+        //outside this function, so it cannot be passed correctly with navigation
+
+        let x=0
         if(isCorrect){
-            setScore(score+1)
-            console.log('is correct')
+            x = score+1
+            setScore(x)
+            console.log('score is', score)
         }
 
         const nextQuestion = currentQuestion + 1
@@ -51,11 +56,10 @@ const Questions = ({route, navigation}) =>{
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            console.log('quiz is over')
-            navigation.goBack()
-            navigation.goBack()
+            navigation.navigate('Feedback', {'score': x, 'length':dummyQuestions.length})
             //go back to home page when quiz is over
         }
+        setSelected(null)
     }
 
    

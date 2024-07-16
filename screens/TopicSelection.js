@@ -20,7 +20,6 @@ const TopicSelection = ({route, navigation}) => {
     //callback function to retrieve values from checklist component
     const getSubtopics =  (value) => {
         subtopics= value
-        console.log(subtopics)
     }
 
 

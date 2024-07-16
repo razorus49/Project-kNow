@@ -21,18 +21,15 @@ const Question = ({question, options, selected, onSelect}) => {
     for (let i=0;i<options.length;++i){
         optionsDic.push({text:options[i], id: (i+1)})
     }
-    console.log(optionsDic)
+   
 
     //state needs to be in the parent component which would otherwise trigger 
     // Cannot update a component while rendering a different component warning
-
-    console.log(optionsDic[0].id)
 
     return (
         <View>
             <Text> question component</Text>
             <Text>{JSON.stringify(question)}</Text>
-            {/* <OptionList options={optionsDic} selected={selected} onSelect={onSelect}/> */}
                 <FlatList 
                     data={optionsDic}
                     renderItem={({item}) => 

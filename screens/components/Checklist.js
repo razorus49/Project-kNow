@@ -41,8 +41,7 @@ const Checklist= ({topic, valueGetter}) => {
     const [subtopics, setTopics] = useState(d[topic])
 
     //useEffect hook invokes the getter function every time the value of subtopics changes
-    useEffect(()=>{valueGetter(subtopics)
-    }, [subtopics, valueGetter])
+    useEffect(()=>{valueGetter(subtopics)}, [subtopics, valueGetter])
 
     const toggleTopic = (id)=>{
       //subtopic would be dictionaries in the array, if the id is selected, copy the previous content and change the state of selection to the opposite boolean

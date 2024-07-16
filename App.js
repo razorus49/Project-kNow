@@ -6,7 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './screens/Home.js'
 import AccountDashboard from './screens/AccountDashboard.js'
 import TopicSelection  from './screens/TopicSelection.js'
-import Questions  from './screens/Questions.js'
+import Questions  from './screens/QuestionScreen.js'
+import Feedback from './screens/Feedback.js'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const Tab = createBottomTabNavigator()
@@ -22,6 +23,7 @@ function StackNav(){
       <Stack.Screen name="QuestionsHome" component={HomeScreen} />
       <Stack.Screen name="TopicSelection" component={TopicSelection} />
       <Stack.Screen name="Questions" component={Questions} />
+      <Stack.Screen name="Feedback" component={Feedback} />
     </Stack.Navigator>
   );
 }

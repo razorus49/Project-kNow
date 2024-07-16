@@ -38,7 +38,7 @@ const Home = ({navigation}) => {
         const backgroundColor = item.id === selectedId ? '#08878F' : '#6e3b6e'; 
         const color = item.id === selectedId ? 'white' : 'black';
         const title = item.id === selectedId? item.title : 'Home'; //title of the selected item
-        console.log(title)
+
         return (
             //passes parameters to the item component
             <Item
