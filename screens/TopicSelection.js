@@ -30,7 +30,7 @@ const TopicSelection = ({route, navigation}) => {
             <Button title="links to home"
             onPress={()=> navigation.goBack()}/>
             <Button title="proceed"
-            onPress={()=> navigation.navigate('Questions', {subtopicList: subtopics})}/>
+            onPress={()=> navigation.navigate('Questions', {subtopicList: subtopics, topic:topic})}/>
         </ScrollView>
     )
 };
