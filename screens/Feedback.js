@@ -2,15 +2,20 @@ import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react
 import React, {useEffect, useState} from 'react';
 
 const Feedback = ({route, navigation}) => {
-    const score= route.params.score
+    const userAnswers= route.params.userAnswers
+    const correctAnswers = route.params.correctAnswers
+    console.log(userAnswers, correctAnswers)
     const length = route.params.length
-    console.log('length is', length)
-    console.log('score is', score)
+    let score=0
+    for(let i=0;i<userAnswers.length;++i){
+        if((userAnswers[i]+1)==correctAnswers[i]) {score++}
+    }
 
+    const accuracy = score/length
     return(
         <View>
             <Text style={{fontSize:30}}>Feedback Page</Text>
-            <Text style={{fontSize:20}}>score: {JSON.stringify(score)}/{length} accuracy: {Math.round((score/length)*100)}%</Text> 
+            <Text style={{fontSize:20}}>score: {JSON.stringify(score)}/{lengthp} accuracy: {Math.round((score/length)*100)}% </Text> 
         </View>
     )
 }

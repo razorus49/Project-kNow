@@ -29,9 +29,10 @@ const Questions = ({route, navigation}) =>{
     //extract relevant questions from data
     let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
     let dummyQuestionList = []
+    let correctAnswers=[]
     for(let i=0;i<selected_subtopics.length;++i){
         dummyQuestionList.push(QuestionListByTopic[selected_subtopics[i]][0]) 
-        
+        correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][0].answer)
         //0th index for testing purposes
         //function to select questions randomly to be added later
     }
@@ -57,8 +58,6 @@ const Questions = ({route, navigation}) =>{
         console.log('answers:', answer, dummyQuestionList[currentQuestion].answer )
         console.log('answer is correct?', isCorrect)
         console.log('current question (handle ans): ', currentQuestion)
-        //uses another variable x because the state of score updates 
-        //outside this function, so it cannot be passed correctly with navigation
 
         const nextQuestion = currentQuestion + 1
 
@@ -66,7 +65,7 @@ const Questions = ({route, navigation}) =>{
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            navigation.navigate('Feedback', {'answers': selected})
+            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':dummyQuestionList.length})
             //go back to home page when quiz is over
         }
 
@@ -86,7 +85,7 @@ const Questions = ({route, navigation}) =>{
             <Text>questions screen</Text>
 
             <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/>
-            <Text>score: {score}</Text>
+
             <View style={{flexDirection:"row"}}>
                 <Button title="next question" onPress={()=>handleAnswer(selected)}/>
                 <Button title="previous question" onPress={()=>prevQuestion()} />
