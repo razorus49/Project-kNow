@@ -16,7 +16,7 @@ let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestio
 const Questions = ({route, navigation}) =>{
     const subtopicList = route.params.subtopicList
     const topic =route.params.topic
-    console.log(subtopicList)
+
     let selected_subtopics = []
 
     //extract all the selected subtopics 
@@ -38,27 +38,27 @@ const Questions = ({route, navigation}) =>{
 
     //can update questions in real time by changing state
     const [currentQuestion, setCurrentQuestion] = useState(0)
-    const [score, setScore] = useState(0)
-    const [selected, setSelected] = useState(null)
 
+    const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
+    let selected_arr = initializeArrayWithValues(selected_subtopics.length, '')
+
+    const [selected, setSelected] = useState(selected_arr)
+
+    //id refers to option 1,2,3 or 4
     const onSelect = (id) => {
-       setSelected(id)
-       console.log(id)
+        let temp_arr = [...selected]
+        temp_arr[currentQuestion] = id
+        setSelected(temp_arr)
     }
 
     const handleAnswer = (answer) => {
 
-        const isCorrect = answer === dummyQuestionList[currentQuestion].answer
-
+        const isCorrect = (answer[currentQuestion]+1) === dummyQuestionList[currentQuestion].answer
+        console.log('answers:', answer, dummyQuestionList[currentQuestion].answer )
+        console.log('answer is correct?', isCorrect)
+        console.log('current question (handle ans): ', currentQuestion)
         //uses another variable x because the state of score updates 
         //outside this function, so it cannot be passed correctly with navigation
-
-        let x=0
-        if(isCorrect){
-            x = score+1
-            setScore(x)
-
-        }
 
         const nextQuestion = currentQuestion + 1
 
@@ -66,23 +66,33 @@ const Questions = ({route, navigation}) =>{
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            navigation.navigate('Feedback', {'score': x, 'length':dummyQuestionList.length})
+            navigation.navigate('Feedback', {'answers': selected})
             //go back to home page when quiz is over
         }
-        setSelected(null)
+
     }
 
+    const prevQuestion = () => {
+        if (currentQuestion > 0 ){
+            const lastQuestion = currentQuestion-1
+            setCurrentQuestion(lastQuestion)
+            console.log("current question is: ", currentQuestion)
+        }
+    }
    
     return(
         <View>
             <Text style={{fontSize:20}}> {JSON.stringify(selected_subtopics)} </Text>
             <Text>questions screen</Text>
 
-            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} onSelect={onSelect}/>
+            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/>
             <Text>score: {score}</Text>
-            <Button title="next question" onPress={()=>handleAnswer(selected)}/>
+            <View style={{flexDirection:"row"}}>
+                <Button title="next question" onPress={()=>handleAnswer(selected)}/>
+                <Button title="previous question" onPress={()=>prevQuestion()} />
+            </View>
             <Button title="go back" onPress={()=> navigation.goBack()}/>
-        
+
         </View>
     )        
 }

@@ -7,21 +7,21 @@ import OptionList from './OptionList';
 const Options = ({text, id, selected, onSelect}) => (
     <View >
       <TouchableOpacity style={styles.item} onPress={()=> onSelect(id)}>
-        <Text style={{color: selected? '#44B0F2' : '#b191ef' }}> {text}</Text>
+        <Text style={{color: selected? '#44B0F2' : '#b191ef' }}> {text} selected: {JSON.stringify(selected)} id:{id}</Text>
       </TouchableOpacity>
     </View>
   )
 
   //example of options  [{"id": 0, "text": "<script>"}, {"id": 1, "text": "<javascript>"}, {"id": 2, "text": "<js>"}, {"id": 3, "text": "<scripting>"}]
 
-const Question = ({question, options, selected, onSelect}) => {
+const Question = ({question, options, selected, onSelect, currentQuestion}) => {
 
+    
     //put options into a dictionary that can be better utilised with id
     let optionsDic = []
     for (let i=0;i<options.length;++i){
-        optionsDic.push({text:options[i], id: (i+1)})
+        optionsDic.push({text:options[i], id: (i)})
     }
-   
 
     //state needs to be in the parent component which would otherwise trigger 
     // Cannot update a component while rendering a different component warning
@@ -36,7 +36,7 @@ const Question = ({question, options, selected, onSelect}) => {
                         (<Options 
                         text={item.text}
                         id={item.id}
-                        selected={item.id===selected}
+                        selected={item.id===selected[currentQuestion]}
                         onSelect={onSelect}
                         />)}
                     keyExtractor={(item, index) => item.id}
