@@ -2,7 +2,7 @@
     "Arithmetics": {
         "多位數":[
             {
-                "question": "多位數 - ans: 1",
+                "question": "1. 多位數 - ans: 1",
                 "options": ["1","2","3","4"],
                 "answer": 1
             }

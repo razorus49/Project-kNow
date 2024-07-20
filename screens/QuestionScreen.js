@@ -16,6 +16,7 @@ let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestio
 const Questions = ({route, navigation}) =>{
     const subtopicList = route.params.subtopicList
     const topic =route.params.topic
+    const number = route.params.number
 
     let selected_subtopics = []
 
@@ -24,6 +25,10 @@ const Questions = ({route, navigation}) =>{
         if (subtopicList[i].selected) {
             selected_subtopics.push(subtopicList[i].subtopic_text)
         }
+    }
+    
+    if(selected_subtopics < 1) {
+        navigation.goBack()
     }
     
     //extract relevant questions from data
@@ -78,11 +83,12 @@ const Questions = ({route, navigation}) =>{
             console.log("current question is: ", currentQuestion)
         }
     }
-   
+    
+
     return(
         <View>
             <Text style={{fontSize:20}}> {JSON.stringify(selected_subtopics)} </Text>
-            <Text>questions screen</Text>
+            <Text>questions screen ; number of questions: {number}</Text>
 
             <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/>
 
