@@ -1,4 +1,4 @@
-import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState, createContext} from 'react';
 import OptionList from './OptionList';
 

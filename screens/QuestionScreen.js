@@ -8,61 +8,42 @@ import {
 import { useNavigation, useRoute, getParam } from '@react-navigation/native';
 import Question from './components/Question.js'
 import dummyQuestionsJSON from './data/questions.json' 
-import data from './data/dummyTopicQ.json'
+
 //dummy questions for testing
 
 let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestionsJSON
 
 const Questions = ({route, navigation}) =>{
-    const subtopicList = route.params.subtopicList
-    const topic =route.params.topic
-    const number = route.params.number
+    const dummyQuestionList = route.params.questionList
+    const correctAnswers = route.params.correctAnswers
+    const numOfQuestions = route.params.number
 
-    let selected_subtopics = []
 
-    //extract all the selected subtopics 
-    for(let i=0;i<subtopicList.length;++i){
-        if (subtopicList[i].selected) {
-            selected_subtopics.push(subtopicList[i].subtopic_text)
-        }
-    }
-    
-    if(selected_subtopics < 1) {
-        navigation.goBack()
-    }
-    
-    //extract relevant questions from data
-    let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
-    let dummyQuestionList = []
-    let correctAnswers=[]
-    for(let i=0;i<selected_subtopics.length;++i){
-        dummyQuestionList.push(QuestionListByTopic[selected_subtopics[i]][0]) 
-        correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][0].answer)
-        //0th index for testing purposes
-        //function to select questions randomly to be added later
-    }
+
+
+
+    console.log(dummyQuestionList)
 
     //can update questions in real time by changing state
     const [currentQuestion, setCurrentQuestion] = useState(0)
+    const [selected, setSelected] = useState(selected_arr)
 
     const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
-    let selected_arr = initializeArrayWithValues(selected_subtopics.length, '')
+    let selected_arr = initializeArrayWithValues(numOfQuestions, '')
 
-    const [selected, setSelected] = useState(selected_arr)
 
     //id refers to option 1,2,3 or 4
     const onSelect = (id) => {
         let temp_arr = [...selected]
         temp_arr[currentQuestion] = id
         setSelected(temp_arr)
+        console.log(temp_arr)
     }
 
     const handleAnswer = (answer) => {
 
         const isCorrect = (answer[currentQuestion]+1) === dummyQuestionList[currentQuestion].answer
         console.log('answers:', answer, dummyQuestionList[currentQuestion].answer )
-        console.log('answer is correct?', isCorrect)
-        console.log('current question (handle ans): ', currentQuestion)
 
         const nextQuestion = currentQuestion + 1
 
@@ -87,16 +68,18 @@ const Questions = ({route, navigation}) =>{
 
     return(
         <View>
-            <Text style={{fontSize:20}}> {JSON.stringify(selected_subtopics)} </Text>
-            <Text>questions screen ; number of questions: {number}</Text>
-
-            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/>
+            <Text style={{fontSize:20}}> {JSON.stringify(subtopicList)} </Text>
+             <Text>questions screen ; number of questions: {numOfQuestions}</Text>
+          
+            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/> 
+             
 
             <View style={{flexDirection:"row"}}>
                 <Button title="next question" onPress={()=>handleAnswer(selected)}/>
                 <Button title="previous question" onPress={()=>prevQuestion()} />
-            </View>
-            <Button title="go back" onPress={()=> navigation.goBack()}/>
+            
+            </View> 
+            <Button title="go back" onPress={()=> navigation.goBack()}/> 
 
         </View>
     )        

@@ -2,7 +2,32 @@
     "Arithmetics": {
         "多位數":[
             {
-                "question": "1. 多位數 - ans: 1",
+                "question": "1. 多位數 - ans: 1  abc",
+                "options": ["1","2","3","4"],
+                "answer": 1
+            },
+            {
+                "question": "2. 多位數 - ans: 1 def",
+                "options": ["1","2","3","4"],
+                "answer": 1
+            },
+            {
+                "question": "3. 多位數 - ans: 1 ghi",
+                "options": ["1","2","3","4"],
+                "answer": 1
+            },
+            {
+                "question": "4. 多位數 - ans: 1 =",
+                "options": ["1","2","3","4"],
+                "answer": 1
+            },
+            {
+                "question": "5. 多位數 - ans: 1",
+                "options": ["1","2","3","4"],
+                "answer": 1
+            },
+            {
+                "question": "6. 多位數 - ans: 1",
                 "options": ["1","2","3","4"],
                 "answer": 1
             }
@@ -10,7 +35,17 @@
         
         "分數的比較和加減":[
             {
-                "question": "分數的比較和加減 - ans: 2",
+                "question": "1. 分數的比較和加減 - ans: 2",
+                "options": ["1","2","3","4"],
+                "answer": 2
+            },
+            {
+                "question": "2. 分數的比較和加減 - ans: 2",
+                "options": ["1","2","3","4"],
+                "answer": 2
+            },
+            {
+                "question": "3. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "answer": 2
             }
