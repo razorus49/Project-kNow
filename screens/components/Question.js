@@ -14,15 +14,14 @@ const Options = ({text, id, selected, onSelect}) => (
 
   //example of options  [{"id": 0, "text": "<script>"}, {"id": 1, "text": "<javascript>"}, {"id": 2, "text": "<js>"}, {"id": 3, "text": "<scripting>"}]
 
-const Question = ({question, options, selected, onSelect, currentQuestion}) => {
-
+const Question = ({question, options, selected, onSelect}) => {
     
     //put options into a dictionary that can be better utilised with id
     let optionsDic = []
     for (let i=0;i<options.length;++i){
         optionsDic.push({text:options[i], id: (i)})
     }
-
+    console.log('options dictinoary: ', optionsDic)
     //state needs to be in the parent component which would otherwise trigger 
     // Cannot update a component while rendering a different component warning
 
@@ -30,17 +29,17 @@ const Question = ({question, options, selected, onSelect, currentQuestion}) => {
         <View>
             <Text> question component</Text>
             <Text>{JSON.stringify(question)}</Text>
-                <FlatList 
+                 <FlatList 
                     data={optionsDic}
                     renderItem={({item}) => 
                         (<Options 
                         text={item.text}
                         id={item.id}
-                        selected={item.id===selected[currentQuestion]}
+                        selected={item.id===selected}
                         onSelect={onSelect}
                         />)}
-                    keyExtractor={(item, index) => item.id}
-                />
+                    keyExtractor={(item) => item.id.toString()}
+                /> 
 
         </View>
     )

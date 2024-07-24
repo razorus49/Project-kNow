@@ -15,7 +15,7 @@ const Feedback = ({route, navigation}) => {
     return(
         <View>
             <Text style={{fontSize:30}}>Feedback Page</Text>
-            <Text style={{fontSize:20}}>score: {JSON.stringify(score)}/{lengthp} accuracy: {Math.round((score/length)*100)}% </Text> 
+            <Text style={{fontSize:20}}>score: {JSON.stringify(score)}/{length} accuracy: {Math.round((score/length)*100)}% </Text> 
         </View>
     )
 }

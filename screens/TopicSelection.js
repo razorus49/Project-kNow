@@ -23,7 +23,7 @@ const TopicSelection = ({route, navigation}) => {
     }
     
     const getRandomQuestions = (selected_subtopics)=> {
-        let QuestionListByTopic = JSON.parse(JSON.stringify(data)).
+        let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
         let dummyQuestionList = []
         let correctAnswers=[]
 

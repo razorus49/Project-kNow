@@ -19,17 +19,16 @@ const Questions = ({route, navigation}) =>{
     const numOfQuestions = route.params.number
 
 
+    
 
-
-
-    console.log(dummyQuestionList)
+    // console.log(dummyQuestionList)
+    const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
+    let selected_arr = initializeArrayWithValues(numOfQuestions, '')
 
     //can update questions in real time by changing state
     const [currentQuestion, setCurrentQuestion] = useState(0)
     const [selected, setSelected] = useState(selected_arr)
 
-    const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
-    let selected_arr = initializeArrayWithValues(numOfQuestions, '')
 
 
     //id refers to option 1,2,3 or 4
@@ -51,7 +50,7 @@ const Questions = ({route, navigation}) =>{
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':dummyQuestionList.length})
+            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':numOfQuestions})
             //go back to home page when quiz is over
         }
 
@@ -65,20 +64,22 @@ const Questions = ({route, navigation}) =>{
         }
     }
     
-
+    // console.log(dummyQuestionList)
     return(
         <View>
-            <Text style={{fontSize:20}}> {JSON.stringify(subtopicList)} </Text>
-             <Text>questions screen ; number of questions: {numOfQuestions}</Text>
-          
-            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected} currentQuestion={currentQuestion} onSelect={onSelect}/> 
-             
 
+             <Text>questions screen ; number of questions: {numOfQuestions}</Text>
+             <Text>{JSON.stringify(selected)}</Text>
+            
+                
+     
+            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected[currentQuestion]} onSelect={onSelect}/> 
+ 
             <View style={{flexDirection:"row"}}>
                 <Button title="next question" onPress={()=>handleAnswer(selected)}/>
                 <Button title="previous question" onPress={()=>prevQuestion()} />
             
-            </View> 
+            </View>  
             <Button title="go back" onPress={()=> navigation.goBack()}/> 
 
         </View>
