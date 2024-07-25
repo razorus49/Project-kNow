@@ -14,14 +14,14 @@ import dummyQuestionsJSON from './data/questions.json'
 let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestionsJSON
 
 const Questions = ({route, navigation}) =>{
-    const dummyQuestionList = route.params.questionList
+    const QuestionList = route.params.questionList
     const correctAnswers = route.params.correctAnswers
     const numOfQuestions = route.params.number
-
+    const subtopicList = route.params.subtopicList
 
     
 
-    // console.log(dummyQuestionList)
+    // console.log(QuestionList)
     const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
     let selected_arr = initializeArrayWithValues(numOfQuestions, '')
 
@@ -41,16 +41,16 @@ const Questions = ({route, navigation}) =>{
 
     const handleAnswer = (answer) => {
 
-        const isCorrect = (answer[currentQuestion]+1) === dummyQuestionList[currentQuestion].answer
-        console.log('answers:', answer, dummyQuestionList[currentQuestion].answer )
+        const isCorrect = (answer[currentQuestion]+1) === QuestionList[currentQuestion].answer
+        console.log('answers:', answer, QuestionList[currentQuestion].answer )
 
         const nextQuestion = currentQuestion + 1
 
-        if(nextQuestion < dummyQuestionList.length){
+        if(nextQuestion < QuestionList.length){
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':numOfQuestions})
+            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':numOfQuestions, 'subtopicList':subtopicList})
             //go back to home page when quiz is over
         }
 
@@ -64,16 +64,17 @@ const Questions = ({route, navigation}) =>{
         }
     }
     
-    // console.log(dummyQuestionList)
+    // console.log(QuestionList)
     return(
         <View>
 
              <Text>questions screen ; number of questions: {numOfQuestions}</Text>
              <Text>{JSON.stringify(selected)}</Text>
             
-                
-     
-            <Question question={dummyQuestionList[currentQuestion].question} options={dummyQuestionList[currentQuestion].options} selected={selected[currentQuestion]} onSelect={onSelect}/> 
+            <Question   question={QuestionList[currentQuestion].question} 
+                        options={QuestionList[currentQuestion].options} 
+                        selected={selected[currentQuestion]} 
+                        onSelect={onSelect}/> 
  
             <View style={{flexDirection:"row"}}>
                 <Button title="next question" onPress={()=>handleAnswer(selected)}/>

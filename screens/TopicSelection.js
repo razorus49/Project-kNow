@@ -24,7 +24,8 @@ const TopicSelection = ({route, navigation}) => {
     
     const getRandomQuestions = (selected_subtopics)=> {
         let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
-        let dummyQuestionList = []
+        let QuestionList = []
+        let subtopicList = []
         let correctAnswers=[]
 
         const equalParts = Math.floor(Number(number)/selected_subtopics.length)
@@ -43,20 +44,21 @@ const TopicSelection = ({route, navigation}) => {
             let j=0
             for(j;j<equalParts;++j){
                 let randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                dummyQuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber]) 
+                QuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber]) 
                 correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][randomNumber].answer) 
-                
+                subtopicList.push(selected_subtopics[i])
             }
 
             if(i<r){
                 let randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                dummyQuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber])
-                correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][randomNumber].answer) 
+                QuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber])
+                correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][randomNumber].answer)
+                subtopicList.push(selected_subtopics[i]) 
             }
             //function to select questions randomly to be added later
         }
 
-        return [dummyQuestionList, correctAnswers]
+        return [QuestionList, correctAnswers, subtopicList]
     }
     const proceed = () => {
         let selected_subtopics = []
@@ -70,8 +72,8 @@ const TopicSelection = ({route, navigation}) => {
         
         if(selected_subtopics.length >=1 && number != '') {
             let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
-            const [QuestionList, correctAnswers] = getRandomQuestions(selected_subtopics)
-            navigation.navigate('Questions', {questionList:QuestionList, correctAnswers:correctAnswers, number:number})
+            const [QuestionList, correctAnswers, subtopicList] = getRandomQuestions(selected_subtopics)
+            navigation.navigate('Questions', {questionList:QuestionList, correctAnswers:correctAnswers, number:number, subtopicList:subtopicList})
         }
         else if(number===''){
             setErrorMsg('please enter number of questions')
@@ -94,7 +96,6 @@ const TopicSelection = ({route, navigation}) => {
             onPress={()=> navigation.goBack()}/>
             <Button title="proceed"
             onPress={()=> proceed()}/>
-            <Text>number: {number}</Text>
         </ScrollView>
     )
 };
