@@ -1,5 +1,19 @@
 import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const storeResults = async (value) => {
+    try {
+        const JSONValue = JSON.stringify(value) 
+        
+        await AsyncStorage.setItem('test', JSONValue)
+        console.log('stored', JSONValue)
+    } catch (e){
+        console.log('error occured')
+    }
+}
+
+
 
 const Item = ({subtopic, correct, total}) => {
     //{name of subtopic, number of correct questions, total number of questions for that subtopic} are the parameters received
@@ -39,6 +53,8 @@ const Feedback = ({route, navigation}) => {
         topicScoreArr.push(value)
     }
     console.log(topicScoreArr)
+
+    storeResults(topicScoreArr)
     const accuracy = score/length
     return(
         <View>
