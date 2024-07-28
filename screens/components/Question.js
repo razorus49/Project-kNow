@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, FlatList, TouchableOpacity} from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image} from 'react-native';
 import React, {useEffect, useState, createContext} from 'react';
 import OptionList from './OptionList';
 
@@ -14,21 +14,25 @@ const Options = ({text, id, selected, onSelect}) => (
 
   //example of options  [{"id": 0, "text": "<script>"}, {"id": 1, "text": "<javascript>"}, {"id": 2, "text": "<js>"}, {"id": 3, "text": "<scripting>"}]
 
-const Question = ({question, options, selected, onSelect}) => {
+const Question = ({question, options, selected, onSelect, image}) => {
     
     //put options into a dictionary that can be better utilised with id
     let optionsDic = []
     for (let i=0;i<options.length;++i){
         optionsDic.push({text:options[i], id: (i)})
     }
-
+  
     //state needs to be in the parent component which would otherwise trigger 
     // Cannot update a component while rendering a different component warning
 
+    const img = image
     return (
         <View>
             <Text> question component</Text>
             <Text>{JSON.stringify(question)}</Text>
+            <Text>{JSON.stringify(image)}</Text>
+            <Image source={require("../images/question1.png")}/>
+            
                  <FlatList 
                     data={optionsDic}
                     renderItem={({item}) => 

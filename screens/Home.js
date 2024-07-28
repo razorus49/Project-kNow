@@ -6,15 +6,16 @@ import {
     StatusBar,
     FlatList,
     TouchableOpacity,
-    View
+    View,
+    Image
   } from 'react-native';
 
 //dictionary of topic titles and description
 const data=[
-    {title: "Arithmetics", desc:"brief desc     "},
-    {title: "Geometry", desc:"brief desc     "},
-    {title: "Statistics", desc:"brief desc     "},
-    {title: "Algebra", desc:"brief desc     "}
+    {title: "Arithmetics", desc:"brief desc     ", img: require("./images/homeScreen/arithmetics.png")},
+    {title: "Geometry", desc:"brief desc     ", img:require("./images/homeScreen/geometry.png")},
+    {title: "Statistics", desc:"brief desc     ", img:require("./images/homeScreen/statistics.png")},
+    {title: "Algebra", desc:"brief desc     ", img:require("./images/homeScreen/algebra.png")}
 ]
 
 //defining a single touchable opacity which acts like a button, used instead for better UI
@@ -26,6 +27,9 @@ const Item = ({item, onPress, backgroundColor, textColor, navigation, name}) => 
         key={item.key}>
       <Text style={[styles.title, {color: textColor}]}>{item.title}</Text>
       <Text style={[styles.desc, {color:textColor}]}> {item.desc}</Text>
+      <Image source={item.img} // Update to use the image URI
+      style={{ width: 100, height: 100 }} />
+
     </TouchableOpacity>
   );
 

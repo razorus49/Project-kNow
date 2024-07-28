@@ -7,11 +7,9 @@ import {
   } from 'react-native';
 import { useNavigation, useRoute, getParam } from '@react-navigation/native';
 import Question from './components/Question.js'
-import dummyQuestionsJSON from './data/questions.json' 
 
 //dummy questions for testing
 
-let dummyQuestions = JSON.parse(JSON.stringify(dummyQuestionsJSON)).dummyQuestionsJSON
 
 const Questions = ({route, navigation}) =>{
     const QuestionList = route.params.questionList
@@ -74,6 +72,7 @@ const Questions = ({route, navigation}) =>{
             <Question   question={QuestionList[currentQuestion].question} 
                         options={QuestionList[currentQuestion].options} 
                         selected={selected[currentQuestion]} 
+                        image={QuestionList[currentQuestion].image}
                         onSelect={onSelect}/> 
  
             <View style={{flexDirection:"row"}}>
