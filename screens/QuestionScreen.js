@@ -6,7 +6,7 @@ import {
     Button
   } from 'react-native';
 import { useNavigation, useRoute, getParam } from '@react-navigation/native';
-import Question from './components/Question.js'
+import Question from '../components/Question.js'
 
 //dummy questions for testing
 

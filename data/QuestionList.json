@@ -104,7 +104,7 @@
             {
                 "question":"圖中 A 是一個平行四邊形，B 是一個三角形。且 B 的底是 A 的 底 的 2 倍 ， 如 果 B 的 面 積 是 32 cm2 ，求陰影部分的面積。",
                 "options":  ["48 cm^2","50 cm^2","52 cm^2","64 cm^2"],
-                "image": "../screens/images/question1.png",
+                "image": "../images/questions/question1.png",
                 "answer": 3
             }
         ]

@@ -25,13 +25,12 @@ const Question = ({question, options, selected, onSelect, image}) => {
     //state needs to be in the parent component which would otherwise trigger 
     // Cannot update a component while rendering a different component warning
 
-    const img = image
     return (
         <View>
             <Text> question component</Text>
             <Text>{JSON.stringify(question)}</Text>
             <Text>{JSON.stringify(image)}</Text>
-            <Image source={require("../images/question1.png")}/>
+            <Image source={image}/>
             
                  <FlatList 
                     data={optionsDic}

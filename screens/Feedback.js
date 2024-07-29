@@ -1,17 +1,6 @@
 import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const storeResults = async (value) => {
-    try {
-        const JSONValue = JSON.stringify(value) 
-        
-        await AsyncStorage.setItem('test', JSONValue)
-        console.log('stored', JSONValue)
-    } catch (e){
-        console.log('error occured')
-    }
-}
+import {storeData} from '../data/storage.js'
 
 
 
@@ -54,7 +43,7 @@ const Feedback = ({route, navigation}) => {
     }
     console.log(topicScoreArr)
 
-    storeResults(topicScoreArr)
+    storeData(topicScoreArr)
     const accuracy = score/length
     return(
         <View>

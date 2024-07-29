@@ -12,10 +12,10 @@ import {
 
 //dictionary of topic titles and description
 const data=[
-    {title: "Arithmetics", desc:"brief desc     ", img: require("./images/homeScreen/arithmetics.png")},
-    {title: "Geometry", desc:"brief desc     ", img:require("./images/homeScreen/geometry.png")},
-    {title: "Statistics", desc:"brief desc     ", img:require("./images/homeScreen/statistics.png")},
-    {title: "Algebra", desc:"brief desc     ", img:require("./images/homeScreen/algebra.png")}
+    {title: "Arithmetics", desc:"brief desc     ", img: require("../images/homeScreen/arithmetics.png")},
+    {title: "Geometry", desc:"brief desc     ", img:require("../images/homeScreen/geometry.png")},
+    {title: "Statistics", desc:"brief desc     ", img:require("../images/homeScreen/statistics.png")},
+    {title: "Algebra", desc:"brief desc     ", img:require("../images/homeScreen/algebra.png")}
 ]
 
 //defining a single touchable opacity which acts like a button, used instead for better UI

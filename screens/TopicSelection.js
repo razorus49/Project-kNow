@@ -6,9 +6,9 @@ import {
     Button,
     TextInput,
   } from 'react-native';
-import Checklist from './components/Checklist.js'
+import Checklist from '../components/Checklist.js'
 //screen of topic selection
-import data from './data/dummyTopicQ.json'
+import data from '../data/QuestionList.json'
 
 const TopicSelection = ({route, navigation}) => {
     const {key, topic} = route.params //takes parameter of selected topic
