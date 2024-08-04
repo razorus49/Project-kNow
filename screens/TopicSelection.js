@@ -60,6 +60,7 @@ const TopicSelection = ({route, navigation}) => {
 
         return [QuestionList, correctAnswers, subtopicList]
     }
+    
     const proceed = () => {
         let selected_subtopics = []
 
