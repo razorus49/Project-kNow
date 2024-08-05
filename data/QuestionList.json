@@ -5,7 +5,8 @@
                 "question": "1. 多位數 - ans: 1  abc",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 1
+                "answer": 1,
+                "function": "multiDigitNumbers"
             },
             {
                 "question": "2. 多位數 - ans: 1 def",
