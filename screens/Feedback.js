@@ -1,7 +1,6 @@
-import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity} from 'react-native';
+import { Text, StyleSheet, Button, View, FlatList, TouchableOpacity, ScrollView} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {storeData} from '../data/storage.js'
-
+import {getData,storeData} from '../data/storage.js'
 
 
 const Item = ({subtopic, correct, total}) => {
@@ -45,6 +44,27 @@ const Feedback = ({route, navigation}) => {
 
     storeData(topicScoreArr)
     const accuracy = score/length
+    const [data, setData] = useState(null)
+
+
+    const refresh = async() => {
+        const y = await getData()
+        setData(y)
+    }
+
+    //initialize state
+    useEffect(() => {
+        const fetchData = async () => {
+            const storedData = await getData();
+            setData(storedData);
+        };
+
+        fetchData();
+    }, []);
+    //empty dependency array means it only runs once on mount
+
+
+
     return(
         <View>
             <Text style={{fontSize:30}}>Feedback Page</Text>
@@ -59,13 +79,42 @@ const Feedback = ({route, navigation}) => {
                 keyExtractor={(item)=>item.id.toString()}
                 />}
             />
+            <Text> {JSON.stringify(data)}</Text>
+            <Button title="refresh" onPress={()=>refresh()}/>
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
-    item:{
+    container: {
+        flex: 1,
+        padding: 20,
+    },
+    dataContainer: {
+        marginTop: 20,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+    },
+    row: {
+        flexDirection: 'row',
+        marginBottom: 5,
+    },
+    textContainer: {
+        width: 170, // Fixed width for the text container
+    },
+    dataTextContainer: {
+        flex: 1,
+    },
+    key: {
+        fontWeight: 'bold',
+    },
+    value: {
+        marginLeft: 5,
+    },
+    item:{ 
         margin:20
     }
-})
+});
 export default Feedback

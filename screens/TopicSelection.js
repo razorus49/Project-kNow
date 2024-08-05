@@ -7,8 +7,9 @@ import {
     TextInput,
   } from 'react-native';
 import Checklist from '../components/Checklist.js'
-//screen of topic selection
 import data from '../data/QuestionList.json'
+import questionGenerator from '../data/questionGenerator.js'
+
 
 const TopicSelection = ({route, navigation}) => {
     const {key, topic} = route.params //takes parameter of selected topic
@@ -38,29 +39,50 @@ const TopicSelection = ({route, navigation}) => {
             return num        
         }
 
+
         for(let i=0;i<selected_subtopics.length;++i){
 
             //uses nested loop instead of slicing so it does not return an array but instead individual objects
             let j=0
             for(j;j<equalParts;++j){
-                let randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                QuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber]) 
-                correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][randomNumber].answer) 
+                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
+                console.log('random number', randomNumber)
+                const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
+                console.log("something")
+                console.log(question)
+                // console.log(question["function"])
+
+                let val = question
+                
+                //check if question requires a generator function
+                if(question.function!=null){
+                    val = questionGenerator[question["function"]]() 
+                }
+
+                QuestionList.push(val) 
+                correctAnswers.push(val.answer) 
                 subtopicList.push(selected_subtopics[i])
             }
 
             if(i<r){
                 let randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                QuestionList.push(QuestionListByTopic[selected_subtopics[i]][randomNumber])
-                correctAnswers.push(QuestionListByTopic[selected_subtopics[i]][randomNumber].answer)
+                const question = QuestionListByTopic[selected_subtopics[i][randomNumber]]
+                let val = question
+                
+                
+                if(question.function!=null){
+                    val = questionGenerator[question.function]() 
+                }
+
+                QuestionList.push(val)
+                correctAnswers.push(val.answer)
                 subtopicList.push(selected_subtopics[i]) 
             }
-            //function to select questions randomly to be added later
         }
 
         return [QuestionList, correctAnswers, subtopicList]
     }
-    
+
     const proceed = () => {
         let selected_subtopics = []
 

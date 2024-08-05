@@ -2,41 +2,14 @@
     "Arithmetics": {
         "多位數":[
             {
-                "question": "1. 多位數 - ans: 1  abc",
-                "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 1,
-                "function": "multiDigitNumbers"
+                "function": "multiDigitNumbers",
+                "answer":2
             },
             {
-                "question": "2. 多位數 - ans: 1 def",
-                "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 1
-            },
-            {
-                "question": "3. 多位數 - ans: 1 ghi",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "answer": 1
-            },
-            {
-                "question": "4. 多位數 - ans: 1 =",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "answer": 1
-            },
-            {
-                "question": "5. 多位數 - ans: 1",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "answer": 1
-            },
-            {
-                "question": "6. 多位數 - ans: 1",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "answer": 1
+                "function": "multiDigitNumbers",
+                "answer":2
             }
         ], 
         
@@ -45,19 +18,22 @@
                 "question": "1. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             },
             {
                 "question": "2. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             },
             {
                 "question": "3. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             }
         ], 
         "分數除法及四則混合計算":[
@@ -65,7 +41,8 @@
                 "question": "分數除法及四則混合計算 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             }
         ], 
         "小數乘法":[
@@ -73,7 +50,8 @@
                 "question": "小數乘法 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             } 
         ],
         "小數除法及四則混合計算":[
@@ -81,7 +59,8 @@
                 "question": "小數除法及四則混合計算 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             }   
         ],
         "小數和分數互化":[
@@ -89,7 +68,8 @@
                 "question": "小數和分數互化 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             }   
         ], 
         "分數乘法":[
@@ -97,7 +77,8 @@
                 "question": "分數乘法 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
-                "answer": 2
+                "answer": 2,
+                "function": null
             }   
         ]},
     "Geometry": {
@@ -106,7 +87,8 @@
                 "question":"圖中 A 是一個平行四邊形，B 是一個三角形。且 B 的底是 A 的 底 的 2 倍 ， 如 果 B 的 面 積 是 32 cm2 ，求陰影部分的面積。",
                 "options":  ["48 cm^2","50 cm^2","52 cm^2","64 cm^2"],
                 "image": "../images/questions/question1.png",
-                "answer": 3
+                "answer": 3,
+                "function": null
             }
         ]
     }

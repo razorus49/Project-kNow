@@ -42,9 +42,11 @@ const AccountDashboard = ({navigation}) => {
     return(
         <View style={styles.container}> 
             <Text style={{fontSize:30}}> Account Dashboard </Text>
-            <Text>{JSON.stringify(data)}</Text>
-            <Text>Arithmetics</Text>
-            <ScrollView style={styles.dataContainer}>
+ {data ? (
+            <>
+                <Text>{JSON.stringify(data)}</Text>
+                <Text>Arithmetics</Text>
+                <ScrollView style={styles.dataContainer}>
                     {Object.keys(data).map((key) => (
                         <View style={styles.row} key={key}>
                             <View style={styles.textContainer}>
@@ -55,7 +57,11 @@ const AccountDashboard = ({navigation}) => {
                             </View>
                         </View>
                     ))}
-            </ScrollView>
+                </ScrollView>
+            </>
+        ) : (
+            <Text>No data available</Text>
+        )}
             <Button title="refresh" onPress={()=>refresh()}/>
             <Button title="links to home"
             onPress={()=> navigation.navigate('Home')}/>
