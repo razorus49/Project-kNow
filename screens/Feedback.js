@@ -40,8 +40,6 @@ const Feedback = ({route, navigation}) => {
     for (const [key, value] of Object.entries(topicScore)){
         topicScoreArr.push(value)
     }
-    console.log(topicScoreArr)
-
     storeData(topicScoreArr)
     const accuracy = score/length
     const [data, setData] = useState(null)
