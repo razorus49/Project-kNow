@@ -13,7 +13,7 @@ import questionGenerator from '../data/questionGenerator.js'
 
 const TopicSelection = ({route, navigation}) => {
     const {key, topic} = route.params //takes parameter of selected topic
-    const [number, setNumber] = useState('')
+    const [number, setNumber] = useState('') //number of questions
     const [subtopics, setSubtopics] = useState('a')
     const [errorMsg, setErrorMsg] = useState('')
     // const [subtopics, setSubtopics] = useState()
@@ -29,10 +29,10 @@ const TopicSelection = ({route, navigation}) => {
         let subtopicList = []
         let correctAnswers=[]
 
-        const equalParts = Math.floor(Number(number)/selected_subtopics.length)
-        const r = Number(number) % selected_subtopics.length
+        const equalParts = Math.floor(Number(number)/selected_subtopics.length)// number of questions that are the same for all subtopics
+        const r = Number(number) % selected_subtopics.length //number of remaining subtopics
 
-
+        console.log("number of questions", number)
         
         const randomQuestion = (listLength) => {
             let num = Math.floor(Math.random() * listLength)
@@ -43,20 +43,20 @@ const TopicSelection = ({route, navigation}) => {
         for(let i=0;i<selected_subtopics.length;++i){
 
             //uses nested loop instead of slicing so it does not return an array but instead individual objects
-            let j=0
-            for(j;j<equalParts;++j){
-                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                console.log('random number', randomNumber)
+            for(let j=0;j<equalParts;++j){
+                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)//random number from range(number of questions available for one subtopic)
                 const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
-                console.log("something")
+ 
                 console.log(question)
-                // console.log(question["function"])
+                console.log(question.function)
 
                 let val = question
                 
                 //check if question requires a generator function
-                if(question.function!=null){
+                if(question.function!= "noFunction"){
+                    console.log("condition met")
                     val = questionGenerator[question["function"]]() 
+                    console.log('val received')
                 }
 
                 QuestionList.push(val) 
@@ -65,18 +65,22 @@ const TopicSelection = ({route, navigation}) => {
             }
 
             if(i<r){
-                let randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)
-                const question = QuestionListByTopic[selected_subtopics[i][randomNumber]]
+                console.log("remainder section")
+                console.log("i, r", i, r)
+                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)//random number from range(number of questions available for one subtopic)
+                const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
                 let val = question
-                
-                
-                if(question.function!=null){
-                    val = questionGenerator[question.function]() 
+                console.log(val)
+                //check if question requires a generator function
+                if(question.function!= "noFunction"){
+                    console.log("condition met")
+                    val = questionGenerator[question["function"]]() 
+                    console.log('val received')
                 }
 
-                QuestionList.push(val)
-                correctAnswers.push(val.answer)
-                subtopicList.push(selected_subtopics[i]) 
+                QuestionList.push(val) 
+                correctAnswers.push(val.answer) 
+                subtopicList.push(selected_subtopics[i])
             }
         }
 

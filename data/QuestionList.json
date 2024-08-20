@@ -3,13 +3,15 @@
         "多位數":[
             {
                 "image": "",
-                "function": "multiDigitNumbers",
-                "answer":2
+                "function": "multiDigitNumbers"
+
             },
             {
+                "question": "1. 多位數 - ans: 2",
+                "options": ["1","2","3","4"],
                 "image": "",
-                "function": "multiDigitNumbers",
-                "answer":2
+                "answer": 2,
+                "function": "noFunction"
             }
         ], 
         
@@ -19,21 +21,21 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             },
             {
                 "question": "2. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             },
             {
                 "question": "3. 分數的比較和加減 - ans: 2",
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             }
         ], 
         "分數除法及四則混合計算":[
@@ -42,7 +44,7 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             }
         ], 
         "小數乘法":[
@@ -51,7 +53,7 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             } 
         ],
         "小數除法及四則混合計算":[
@@ -60,7 +62,7 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             }   
         ],
         "小數和分數互化":[
@@ -69,7 +71,7 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             }   
         ], 
         "分數乘法":[
@@ -78,7 +80,7 @@
                 "options": ["1","2","3","4"],
                 "image": "",
                 "answer": 2,
-                "function": null
+                "function": "noFunction"
             }   
         ]},
     "Geometry": {
@@ -88,7 +90,7 @@
                 "options":  ["48 cm^2","50 cm^2","52 cm^2","64 cm^2"],
                 "image": "../images/questions/question1.png",
                 "answer": 3,
-                "function": null
+                "function": "noFunction"
             }
         ]
     }

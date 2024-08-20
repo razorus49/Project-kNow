@@ -11,13 +11,8 @@ const questionGenerator = {
         const randomNumber= getRandomInt(min, max)
   
         const numLength = String(randomNumber).length
-        console.log('number length:', numLength)
-  
         const digit = getRandomInt(1,numLength)
-        console.log('random digit selected', digit)
-  
         const question = "what does the " + String(digit) + "th digit (from left to right) represent in the number " + String(randomNumber) + "?" 
-        console.log(question)
         const randomOption = getRandomInt(0,3) //select random index of option array to put correct ans
         let options=[0,0,0,0]  
         
@@ -32,8 +27,6 @@ const questionGenerator = {
         }
   
         options[randomOption] = Number(String(randomNumber).charAt(digit-1)) * (10** (numLength-digit))
-        console.log(options)
-        console.log('answer is ', (randomOption+1))
         const answer = randomOption+1
         return {question:question, options:options, answer:answer}
     }

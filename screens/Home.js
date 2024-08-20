@@ -65,7 +65,7 @@ const Home = ({navigation}) => {
             <View style={{flex:1, height:'100%'}}>
                 <FlatList
                     style={{margin:5, flex:1}}
-                    contentContainerStyle={{flexGrow:1}}
+                    contentContainerStyle={{flex:1, flexGrow:1, alignItems:'stretch'}}
                     numColumns={4}
                     columnWrapperStyle={{justifyContent:'space-around'}}
 
@@ -84,38 +84,37 @@ const styles = StyleSheet.create({
         flex: 1,
         marginTop: StatusBar.currentHeight || 0,
         margin:0,
-        height:20,
         backgroundColor:'#0D2B40',
         justifyContent:'center',
 
     },
     screenTitleContainer:{
         padding: 2,
-        margin: 10,
-        borderRadius:5,
-        borderWidth:.5
+        margin: 3,
+        borderRadius:10,
+        borderWidth:.5,
     },
     item: {
         padding: 20,
         margin:20,
         flex:5,
-        height:500
+        alignItems:"stretch"
     },
     screenTitle:{
-        fontSize: 40,
+        fontSize: 30,
         color: '#0D2B40',
         textAlign:'center',
-        margin:20,
-        marginVertical:50,
+        margin:3,
+        marginVertical:10,
         backgroundColor:'#BDE3FF',
         borderRadius:10,
         overflow: 'hidden'
     },
     title: {
-        fontSize: 35,
+        fontSize: 25,
     },
     desc:{
-        fontSize: 20
+        fontSize: 15
     },
     row:{
         flex:1,
