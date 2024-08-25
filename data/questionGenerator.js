@@ -30,6 +30,94 @@ const questionGenerator = {
         const answer = randomOption+1
         return {question:question, options:options, answer:answer}
     }
+
+    ,wordsPerMinute: function generateWordsPerMinute() {
+      let names = ['John', 'Bob', 'Ryan', 'Josh', 'James', 'Mary', 'Elizabeth', 'David', 'Ian', 'Jessica', 'Maria'];
+      let randomNameNum = Math.round((Math.random()*(names.length-1)+0));
+      num1 = Number(randomNameNum);
+
+      // just some code to randomly generate names for the word problem
+      function select2Names(firstChar) {
+          flag = false;
+          do {
+              num2 = Math.round((Math.random()*(names.length-1)+0));
+              if (num2 != firstChar) {
+                  return num2;
+                  flag = true;
+              }
+          } while (!flag)
+      }
+      num2 = Number(select2Names(num1));
+
+      characterOne = names[num1];
+      characterTwo = names[num2];
+
+      function getRandomInt(min,max) {
+          return Math.floor((Math.random() * (max-min)) + min);
+      }
+
+      // range of wpm values will go from 20 - 100 for this question
+      const wpmMin = 20;
+      const wpmMax = 100;
+      // range of minute values will go from 2 - 10 for this question
+      const minsMin = 2;
+      const minsMax = 10;
+
+      let minsValue = getRandomInt(minsMin, minsMax);
+      let minsValue2 = getRandomInt(minsMin, minsMax);
+
+      // function to make sure that the answers will be whole numbers
+      function divisibleWPM(theMinuteValue, wpmMin, wpmMax) {
+          do{
+              flag = false;
+              let randomWpmValue = getRandomInt(wpmMin, wpmMax);
+              if (randomWpmValue%theMinuteValue == 0) {
+                  return randomWpmValue;
+                  flag = true;
+              }
+          }while(!flag)
+      }
+      let wpmValue = divisibleWPM(minsValue,wpmMin,wpmMax);
+      let wpmValue2 = divisibleWPM(minsValue2,wpmMin,wpmMax);
+
+
+      let q1 = (`${characterOne} can type ${wpmValue} words in ${minsValue} minutes. `);
+      let q2 = (`${characterTwo} can type ${wpmValue2} words in ${minsValue2} minutes. `);
+      let q3 = (`What is the difference between the words per minute that ${characterOne} and ${characterTwo} can type? `);
+      question = q1+q2+q3
+
+      let ans = Math.abs((wpmValue/minsValue) - (wpmValue2/minsValue2));
+
+      const randomOption = getRandomInt(0,3);
+      let options = [0,0,0,0];
+
+      // the smallest possible answer is 0, and the largest possible answer is 48 (for the values i used above)
+      let ansMin = 0;
+      let ansMax = (wpmMax/minsMin) - (wpmMin/minsMax);
+
+      // assigning random values to options array
+      // and making sure no answers are repeated in the options array 
+      do{
+          flag = false;
+          for (let i=0;i<4;++i) {
+              options[i] = Math.floor((Math.random() * (ansMax-ansMin)) + ansMin);
+          }
+          if (options[0] != options[1] && options[0] != options[2] && options[0] != options[3] && options[0] != ans) {
+              if (options[1] != options[0] && options[1] != options[2] && options[1] != options[3] && options[1] != ans) {
+                  if (options[2] != options[0] && options[2] != options[1] && options[2] != options[3] && options[2] != ans) {
+                      if (options[3] != options[0] && options[3] != options[1] && options[3] != options[2] && options[3] != ans) {
+                          flag = true;
+                      }
+                  }
+              }
+          }
+      }while(!flag)
+
+      let randomPos = getRandomInt(0,3);
+      options[randomPos] = ans;
+
+      return {question:question, options:options, answer:ans}
+    }
   }
 
 
