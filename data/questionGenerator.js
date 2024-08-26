@@ -118,6 +118,114 @@ const questionGenerator = {
 
       return {question:question, options:options, answer:ans}
     }
+
+    ,factorsOfEquation: function generateFactorsOfEquation () {
+        function getRandomInt(min,max) {
+            return Math.floor((Math.random() * (max-min)) + min);
+        }
+        
+        let result = getRandomInt(40,100);
+        
+        function divisibleResult(result) {
+            let half = result/2;
+            let flag = false;
+            do {
+                let divisor1 = getRandomInt(2,half);
+                if (result%divisor1 == 0 && divisor1 != 2) {
+                    return divisor1;
+                    flag = true;
+                }
+            }while(!flag)
+        }
+        
+        let divisor1 = divisibleResult(result);
+        let ans = (result/divisor1);
+        let question = `What factors enable the following equation to be established: ${divisor1} x __ = ${result}`
+        let options = [0,0,0,0]
+        
+        let half2 = ans/2;
+        let ansMin = (ans-half2);
+        let ansMax = (ans+half2);
+        
+        do{
+            flag = false;
+            for (let i=0;i<4;++i) {
+                options[i] = Math.floor((Math.random() * (ansMax-ansMin)) + ansMin);
+            }
+            if (options[0] != options[1] && options[0] != options[2] && options[0] != options[3] && options[0] != ans) {
+                if (options[1] != options[0] && options[1] != options[2] && options[1] != options[3] && options[1] != ans) {
+                    if (options[2] != options[0] && options[2] != options[1] && options[2] != options[3] && options[2] != ans) {
+                        if (options[3] != options[0] && options[3] != options[1] && options[3] != options[2] && options[3] != ans) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }while(!flag)
+        
+        let randomPos = getRandomInt(0,3);
+        options[randomPos] = ans;
+        
+        return {question: question, options: options, answer: ans}
+    }
+
+    ,variableSubstitution: function generateVariableSubstitution() {
+        function getRandomInt(min,max) {
+            return Math.floor((Math.random() * (max-min)) + min);
+        }
+        
+        let variables = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'm', 'n', 'p', 'q', 'r', 's', 't', 'x', 'y', 'z'];
+        let randomVar = Math.round((Math.random()*(variables.length-1)+0));
+        
+        let varOne = variables[randomVar];
+        
+        let result1 = getRandomInt(15, 50);
+        let multiplier = getRandomInt(3,9);
+        
+        function divisibleResult(result) {
+            let half = result/2;
+            let flag = false;
+            do {
+                let divisor1 = getRandomInt(2,half);
+                if (result%divisor1 == 0) {
+                    return divisor1;
+                    flag = true;
+                }
+            }while(!flag)
+        }
+        
+        let divisor1 = divisibleResult(result1);
+        let question = `If ${divisor1}${varOne} = ${result1}, then ${multiplier}${varOne} = ?`
+        
+        let options = [0,0,0,0];
+        let actualVar = result1/divisor1;
+        let ans = multiplier*actualVar;
+        
+        let half = ans/2;
+        let ansMin = (ans-half);
+        let ansMax = (ans+half)
+        
+        do{
+            flag = false;
+            for (let i=0;i<4;++i) {
+                options[i] = Math.floor((Math.random() * (ansMax-ansMin)) + ansMin);
+            }
+            if (options[0] != options[1] && options[0] != options[2] && options[0] != options[3] && options[0] != ans) {
+                if (options[1] != options[0] && options[1] != options[2] && options[1] != options[3] && options[1] != ans) {
+                    if (options[2] != options[0] && options[2] != options[1] && options[2] != options[3] && options[2] != ans) {
+                        if (options[3] != options[0] && options[3] != options[1] && options[3] != options[2] && options[3] != ans) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }while(!flag)
+        
+        let randomPos = getRandomInt(0,3);
+        options[randomPos] = ans;
+        
+        return {question: question, options: options, answer: ans}
+    }
   }
 
 
