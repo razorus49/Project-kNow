@@ -97,7 +97,6 @@ const Questions = ({route, navigation}) =>{
             <View style={{flexDirection:"row"}}>
                 <Button title="next question" onPress={()=>handleAnswer(answer)}/>
                 <Button title="previous question" onPress={()=>prevQuestion()} />
-            
             </View>  
             <Button title="go back" onPress={()=> navigation.goBack()}/> 
 

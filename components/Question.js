@@ -54,7 +54,7 @@ const TextInputQuestion = ({question, image, onAns, ans}) =>{
       <Text>text input question component</Text>
       <Image source={image}/>
       <Text>{JSON.stringify(question)}</Text>
-      <TextInput onChangeText={onAns} value={ans} placeholder="input ans"/>
+      <TextInput style={styles.textInputStyle} onChangeText={onAns} value={ans} placeholder="input ans" keyboardType='number-pad'/>
     </View>
   )
 }
@@ -70,6 +70,13 @@ const styles = StyleSheet.create({
     title: {
       fontSize: 32,
     },
+    textInputStyle:{
+        borderColor: '#68f2d9',
+        height: 40,
+        margin: 12,
+        borderWidth: 1,
+        padding: 10,
+    }
   });
 
 export {MultipleChoiceQuestion, TextInputQuestion}
