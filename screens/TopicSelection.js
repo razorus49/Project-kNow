@@ -27,6 +27,7 @@ const TopicSelection = ({route, navigation}) => {
         let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
         let QuestionList = []
         let subtopicList = []
+        let questionTypeList = []
         let correctAnswers=[]
 
         const equalParts = Math.floor(Number(number)/selected_subtopics.length)// number of questions that are the same for all subtopics
@@ -39,52 +40,40 @@ const TopicSelection = ({route, navigation}) => {
             return num        
         }
 
+        const addQuestion = (i) => {
+            const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)//random number from range(number of questions available for one subtopic)
+            const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
+
+            console.log(question)
+            console.log(question.function)
+
+            let val = question
+            
+            //check if question requires a generator function
+            if(question.function!= "noFunction"){
+                console.log("condition met")
+                val = questionGenerator[question["function"]]() 
+                console.log('val received')
+            }
+
+            QuestionList.push(val) 
+            correctAnswers.push(val.answer) 
+            subtopicList.push(selected_subtopics[i])
+            questionTypeList.push(val.type)
+        }
 
         for(let i=0;i<selected_subtopics.length;++i){
 
             //uses nested loop instead of slicing so it does not return an array but instead individual objects
             for(let j=0;j<equalParts;++j){
-                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)//random number from range(number of questions available for one subtopic)
-                const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
- 
-                console.log(question)
-                console.log(question.function)
-
-                let val = question
-                
-                //check if question requires a generator function
-                if(question.function!= "noFunction"){
-                    console.log("condition met")
-                    val = questionGenerator[question["function"]]() 
-                    console.log('val received')
-                }
-
-                QuestionList.push(val) 
-                correctAnswers.push(val.answer) 
-                subtopicList.push(selected_subtopics[i])
+                addQuestion(i)
             }
-
             if(i<r){
-                console.log("remainder section")
-                console.log("i, r", i, r)
-                const randomNumber = randomQuestion(QuestionListByTopic[selected_subtopics[i]].length)//random number from range(number of questions available for one subtopic)
-                const question = QuestionListByTopic[selected_subtopics[i]][randomNumber]
-                let val = question
-                console.log(val)
-                //check if question requires a generator function
-                if(question.function!= "noFunction"){
-                    console.log("condition met")
-                    val = questionGenerator[question["function"]]() 
-                    console.log('val received')
-                }
-
-                QuestionList.push(val) 
-                correctAnswers.push(val.answer) 
-                subtopicList.push(selected_subtopics[i])
+                addQuestion(i)
             }
         }
 
-        return [QuestionList, correctAnswers, subtopicList]
+        return [QuestionList, correctAnswers, subtopicList, questionTypeList]
     }
 
     const proceed = () => {
@@ -99,8 +88,9 @@ const TopicSelection = ({route, navigation}) => {
         
         if(selected_subtopics.length >=1 && number != '') {
             let QuestionListByTopic = JSON.parse(JSON.stringify(data))[topic]
-            const [QuestionList, correctAnswers, subtopicList] = getRandomQuestions(selected_subtopics)
-            navigation.navigate('Questions', {questionList:QuestionList, correctAnswers:correctAnswers, number:number, subtopicList:subtopicList})
+            const [QuestionList, correctAnswers, subtopicList, questionTypeList] = getRandomQuestions(selected_subtopics)
+            console.log("question type list: ", questionTypeList)
+            navigation.navigate('Questions', {questionList:QuestionList, correctAnswers:correctAnswers, number:number, subtopicList:subtopicList, questionTypeList:questionTypeList})
         }
         else if(number===''){
             setErrorMsg('please enter number of questions')

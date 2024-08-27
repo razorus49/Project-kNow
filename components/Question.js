@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image} from 'react-native';
+import { Text, StyleSheet, View, FlatList, TouchableOpacity, Image, TextInput} from 'react-native';
 import React, {useEffect, useState, createContext} from 'react';
 import OptionList from './OptionList';
 
@@ -14,12 +14,12 @@ const Options = ({text, id, selected, onSelect}) => (
 
   //example of options  [{"id": 0, "text": "<script>"}, {"id": 1, "text": "<javascript>"}, {"id": 2, "text": "<js>"}, {"id": 3, "text": "<scripting>"}]
 
-const Question = ({question, options, selected, onSelect, image}) => {
+const MultipleChoiceQuestion = ({question, options, selected, onSelect, image}) => {
     
     //put options into a dictionary that can be better utilised with id
     let optionsDic = []
     for (let i=0;i<options.length;++i){
-        optionsDic.push({text:options[i], id: (i)})
+        optionsDic.push({text:options[i], id: (i+1)})
     }
   
     //state needs to be in the parent component which would otherwise trigger 
@@ -48,6 +48,17 @@ const Question = ({question, options, selected, onSelect, image}) => {
     )
 }
 
+const TextInputQuestion = ({question, image, onAns, ans}) =>{
+  return(
+    <View>
+      <Text>text input question component</Text>
+      <Image source={image}/>
+      <Text>{JSON.stringify(question)}</Text>
+      <TextInput onChangeText={onAns} value={ans} placeholder="input ans"/>
+    </View>
+  )
+}
+
 const styles = StyleSheet.create({
 
     item: {
@@ -61,4 +72,4 @@ const styles = StyleSheet.create({
     },
   });
 
-export default Question
+export {MultipleChoiceQuestion, TextInputQuestion}

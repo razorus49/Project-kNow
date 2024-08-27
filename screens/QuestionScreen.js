@@ -6,7 +6,7 @@ import {
     Button
   } from 'react-native';
 import { useNavigation, useRoute, getParam } from '@react-navigation/native';
-import Question from '../components/Question.js'
+import {MultipleChoiceQuestion, TextInputQuestion} from '../components/Question.js'
 
 //dummy questions for testing
 
@@ -16,30 +16,39 @@ const Questions = ({route, navigation}) =>{
     const correctAnswers = route.params.correctAnswers
     const numOfQuestions = route.params.number
     const subtopicList = route.params.subtopicList
-
+    const questionTypeList = route.params.questionTypeList
     
 
     // console.log(QuestionList)
-    const initializeArrayWithValues = (n, val = 0) => Array(n).fill(val)
-    let selected_arr = initializeArrayWithValues(numOfQuestions, '')
+    const initializeArrayWithValues = (n, val = null) => Array(n).fill(val)
+    let dummy_arr = initializeArrayWithValues(numOfQuestions, '')
 
     //can update questions in real time by changing state
     const [currentQuestion, setCurrentQuestion] = useState(0)
-    const [selected, setSelected] = useState(selected_arr)
+    const [answer, setAnswer] = useState(dummy_arr)
 
 
 
-    //id refers to option 1,2,3 or 4
-    const onSelect = (id) => {
-        let temp_arr = [...selected]
+    //id refers to option 1,2,3 or 4 with index 0,1,2,3
+    //must be temp_arr[currentQuestion], not append, as it might change answer of previous questions
+    const onMcAns = (id) => {
+        let temp_arr = [...answer]
         temp_arr[currentQuestion] = id
-        setSelected(temp_arr)
+        setAnswer(temp_arr)
         console.log(temp_arr)
+    }
+
+    const onTextAns = (ans) =>{
+        let temp_arr = [...answer]
+
+        temp_arr[currentQuestion] = ans
+
+        setAnswer(temp_arr)
     }
 
     const handleAnswer = (answer) => {
 
-        const isCorrect = (answer[currentQuestion]+1) === QuestionList[currentQuestion].answer
+        // const isCorrect = (answer[currentQuestion]) === QuestionList[currentQuestion].answer
         console.log('answers:', answer, QuestionList[currentQuestion].answer )
 
         const nextQuestion = currentQuestion + 1
@@ -48,7 +57,7 @@ const Questions = ({route, navigation}) =>{
             setCurrentQuestion(nextQuestion) 
         }
         else{
-            navigation.navigate('Feedback', {'userAnswers': selected, 'correctAnswers':correctAnswers, 'length':numOfQuestions, 'subtopicList':subtopicList})
+            navigation.navigate('Feedback', {userAnswers: answer, correctAnswers:correctAnswers, length:numOfQuestions, subtopicList:subtopicList, questionTypeList:questionTypeList })
             //go back to home page when quiz is over
         }
 
@@ -67,16 +76,26 @@ const Questions = ({route, navigation}) =>{
         <View>
 
              <Text>questions screen ; number of questions: {numOfQuestions}</Text>
-             <Text>{JSON.stringify(selected)}</Text>
+             <Text>{JSON.stringify(answer)}</Text>
             
-            <Question   question={QuestionList[currentQuestion].question} 
-                        options={QuestionList[currentQuestion].options} 
-                        selected={selected[currentQuestion]} 
-                        image={QuestionList[currentQuestion].image}
-                        onSelect={onSelect}/> 
+            {QuestionList[currentQuestion].type === "multipleChoice" && 
+            <MultipleChoiceQuestion   
+                question={QuestionList[currentQuestion].question} 
+                options={QuestionList[currentQuestion].options} 
+                selected={answer[currentQuestion]} 
+                image={QuestionList[currentQuestion].image}
+                onSelect={onMcAns}/> }
+
+            {QuestionList[currentQuestion].type ==="textInput" && 
+            <TextInputQuestion 
+                question={QuestionList[currentQuestion].question}
+                image={QuestionList[currentQuestion].image}
+                ans = {answer[currentQuestion]}
+                onAns={onTextAns} />
+            }
  
             <View style={{flexDirection:"row"}}>
-                <Button title="next question" onPress={()=>handleAnswer(selected)}/>
+                <Button title="next question" onPress={()=>handleAnswer(answer)}/>
                 <Button title="previous question" onPress={()=>prevQuestion()} />
             
             </View>  

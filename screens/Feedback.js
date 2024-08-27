@@ -17,7 +17,7 @@ const Feedback = ({route, navigation}) => {
     const subtopicList = route.params.subtopicList
     const length = route.params.length
     let score=0
-
+                
     let topicScore = {}
 
     for(let i=0;i<subtopicList.length;++i){
@@ -27,7 +27,7 @@ const Feedback = ({route, navigation}) => {
 
 
     for(let i=0;i<userAnswers.length;++i){
-        if((userAnswers[i]+1)==correctAnswers[i]) {
+        if((userAnswers[i])==correctAnswers[i]) {
             score++
             topicScore[subtopicList[i]]['correct']++
             }
