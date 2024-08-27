@@ -226,7 +226,97 @@ const questionGenerator = {
         
         return {question: question, options: options, answer: ans}
     }
-  }
 
+    ,differentDenominatorFraction: function generateDifferentDenominatorFraction() {
+        let foods = ["apples", "oranges", "bananas", "pears", "peaches", "carrots", "watermelons", "pizzas", "strawberries", "blueberries"];
+        let chosenFood = foods[(Math.floor((Math.random() * (foods.length-1))+0))];
+
+        function getRandomInt(min,max) {
+            return Math.floor((Math.random() * (max-min)) + min);
+        }
+
+        let numOfBoxes = getRandomInt(150,30);
+
+        function findFactors(number) {
+            let highestFactor = number/2;
+            let arrayOfFactors = [];
+            for(let i=1;i<highestFactor+1;++i) {
+                if (number%i == 0) {
+                    arrayOfFactors.push(i);
+                }
+            }
+            return arrayOfFactors;
+        }
+        let arrayOfFactors = findFactors(numOfBoxes);
+        let numOfFactors = arrayOfFactors.length;
+
+        let flag = false;
+        function generateNum1() {
+            do{
+                let num1 = getRandomInt(0,numOfFactors-1);
+                if (num1 != 1 && num1 > 1) {
+                    return num1;
+                    flag = true;
+                }
+            }while(!flag)
+        }
+
+        let num1 = generateNum1();
+
+        function select2Numbers(firstChar) {
+            let flag = false;
+            do {
+                let num2 = Math.round((Math.random()*(numOfFactors-1)+0));
+                if (num2 != firstChar && num2 > 1) {
+                    return num2;
+                    flag = true;
+                }
+            } while (!flag)
+        }
+        let num2 = Number(select2Numbers(num1));
+
+        let denominator1 = arrayOfFactors[num1];
+        let denominator2 = arrayOfFactors[num2];
+        let numerator1 = getRandomInt(1,(denominator1*(1/2)));
+        let numerator2 = getRandomInt(1,(denominator2*(1/2)));
+
+        let fraction1 = `${numerator1}/${denominator1}`;
+        let fraction2 = `${numerator2}/${denominator2}`;
+
+        let q1 = `A truck is transporting ${numOfBoxes} boxes of ${chosenFood}. `;
+        let q2 = `${fraction1} of them are transported in the first trip and ${fraction2} of them are transported in the second trip. `;
+        let q3 = `How many boxes of ${chosenFood} are left?`;
+        let question = q1+q2+q3;
+
+        let ans = numOfBoxes - (((eval(fraction1))*numOfBoxes) + ((eval(fraction2))*numOfBoxes));
+        let halfAns = ans/2;
+
+        let options = [0,0,0,0];
+
+        let ansMin = ans-halfAns;
+        let ansMax = ans+halfAns;
+
+        do{
+            flag = false;
+            for (let i=0;i<4;++i) {
+                options[i] = Math.floor((Math.random() * (ansMax-ansMin)) + ansMin);
+            }
+            if (options[0] != options[1] && options[0] != options[2] && options[0] != options[3] && options[0] != ans) {
+                if (options[1] != options[0] && options[1] != options[2] && options[1] != options[3] && options[1] != ans) {
+                    if (options[2] != options[0] && options[2] != options[1] && options[2] != options[3] && options[2] != ans) {
+                        if (options[3] != options[0] && options[3] != options[1] && options[3] != options[2] && options[3] != ans) {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+        }while(!flag)
+
+        let randomPos = getRandomInt(0,3);
+        options[randomPos] = ans;
+
+        return {question: question, options: options, answer: ans}
+    }
+  }
 
   export default questionGenerator
