@@ -44,7 +44,7 @@ const AccountDashboard = ({navigation}) => {
             <Text style={{fontSize:30}}> Account Dashboard </Text>
  {data ? (
             <>
-                <Text>{JSON.stringify(data)}</Text>
+                
                 <Text>Arithmetics</Text>
                 <ScrollView style={styles.dataContainer}>
                     {Object.keys(data).map((key) => (
