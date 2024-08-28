@@ -16,6 +16,13 @@
                 "function": "noFunction"
             }
         ], 
+        "wordsPerMinute":[
+            {
+                "image": "",
+                "type":"multipleChoice",
+                "function":"wordsPerMinute"
+            }
+        ],
         
         "分數的比較和加減":[
             {
@@ -27,20 +34,9 @@
                 "function": "noFunction"
             },
             {
-                "question": "2. 分數的比較和加減 - ans: 2",
-                "options": ["1","2","3","4"],
                 "image": "",
                 "type": "multipleChoice",
-                "answer": 2,
-                "function": "noFunction"
-            },
-            {
-                "question": "3. 分數的比較和加減 - ans: 2",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "type": "multipleChoice",
-                "answer": 2,
-                "function": "noFunction"
+                "function": "fractionAddSub"
             }
         ], 
         "分數除法及四則混合計算":[

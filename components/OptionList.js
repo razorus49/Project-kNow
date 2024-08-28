@@ -5,7 +5,7 @@ import {useState, useEffect} from 'react'
 const Options = ({text, id, selected, onSelect}) => (
     <View >
       <TouchableOpacity onPress={onSelect(id)}>
-        <Text style={{color: selected? '#44B0F2' : '#b191ef' }}>{text}</Text>
+        <Text style={{color: selected? '#44B0F2' : '#000000' }}>{text}</Text>
       </TouchableOpacity>
     </View>
   );

@@ -28,7 +28,7 @@ const questionGenerator = {
   
         options[randomOption] = Number(String(randomNumber).charAt(digit-1)) * (10** (numLength-digit))
         const answer = randomOption+1
-        return {question:question, options:options, answer:answer}
+        return {question:question, options:options, answer:answer, type: "multipleChoice"}
     }
 
     ,wordsPerMinute: function generateWordsPerMinute() {
@@ -116,8 +116,9 @@ const questionGenerator = {
       let randomPos = getRandomInt(0,3);
       options[randomPos] = ans;
 
-      return {question:question, options:options, answer:ans}
+      return {question:question, options:options, answer:randomPos+1, type: "multipleChoice"}
     }
+    
 
     ,factorsOfEquation: function generateFactorsOfEquation () {
         function getRandomInt(min,max) {
@@ -166,8 +167,9 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
         
-        return {question: question, options: options, answer: ans}
+        return {question: question, options: options, answer: ans, type: "multipleChoice"}
     }
+
 
     ,variableSubstitution: function generateVariableSubstitution() {
         function getRandomInt(min,max) {
@@ -224,8 +226,9 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
         
-        return {question: question, options: options, answer: ans}
+        return {question: question, options: options, answer: ans, type: "multipleChoice"}
     }
+
 
     ,differentDenominatorFraction: function generateDifferentDenominatorFraction() {
         let foods = ["apples", "oranges", "bananas", "pears", "peaches", "carrots", "watermelons", "pizzas", "strawberries", "blueberries"];
@@ -315,8 +318,93 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
 
-        return {question: question, options: options, answer: ans}
-    }
+        return {question: question, options: options, answer: ans, type: "multipleChoice"}
+    },
+
+
+    fractionAddSub: function generateFractionAddSub() {
+        function getRandomInt(min, max) {
+          return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+        // later if u want to add common mistakes
+        // fractionsAddSubMistakes=["denomunequal", "denomadd", "missedsimplification"];
+      
+        // function to convert improper fractions to mixed fractions
+        function tomixed(num, dem){
+          const quotient = Math.floor(num/dem);
+          const remainder = num%dem;
+          if(remainder === 0){
+            return quotient;
+          }else{
+            return [quotient, remainder, dem];
+          };
+        };
+        // function to add fractions (in the form of improper/proper fraction)
+        function fractionsAddition(num1, den1, num2, den2){
+          let commonDen = den1 * den2;
+          let newNum1 = num1 * (commonDen / den1);
+          let newNum2 = num2 * (commonDen / den2);
+          let res = newNum1 + newNum2;
+          let gcd = function (a, b) {
+          return b === 0 ? a : gcd(b, a % b);
+          };
+          let div = gcd(res, commonDen);
+          res /= div;
+          commonDen /= div;
+          console.log(`${num1}/${den1} + ${num2}/${den2} is equal to ${res}/${commonDen}`);
+          console.log(res, commonDen);
+          return [res, commonDen];
+        };
+      
+        function mixedFractionAddSub() {
+          var question=[];
+          var numerator1=null;
+          var numerator2=null;
+          var denominator1=null;
+          var denominator2=null;
+          var ans=null;
+          var options=[0, 0, 0, 0]
+          // generate 2 fractions in a way such that one of the fractions must be an improper fraction
+          denominator1=getRandomInt(2, 25)
+          denominator2=getRandomInt(2, 25)
+          numerator1=denominator1+getRandomInt(1, 50)
+          numerator2=getRandomInt(1, 50)
+          question=`${numerator1}/${denominator1} + ${numerator2}/${denominator2}=? (give your answers in the form of mixed fractions)`
+          // store the sum of two fractions
+          let sum=fractionsAddition(numerator1, denominator1, numerator2, denominator2)
+          // change the sum to a mixed fraction
+          let ansArr=tomixed(sum[0], sum[1])
+          // change the mixed fraction to a string
+          ans=ansArr[0].toString().concat(" ", ansArr[1].toString(), "/", ansArr[2].toString())
+          // put ans in random place of options
+          let randomIndex = getRandomInt(0,3)
+          console.log("random index: ", randomIndex)
+          options[randomIndex]=ans
+          // generate random wrong answers and make sure no duplicated ans
+          while (options.includes(0)){
+              let optInt=ansArr[0]+getRandomInt(0, 3)
+              let optNum=ansArr[1]+getRandomInt(0, 3)
+              let optDen=ansArr[2]+getRandomInt(0, 3)
+              let option=optInt.toString().concat(" ", optNum.toString(), "/", optDen.toString())
+              if(!options.includes(option)){
+                  options[options.indexOf(0)]=option
+              }
+              console.log(options)
+          }
+          for (let i = 0; i < options.length; i++) {
+              options[i]=`${options[i]}`
+            }
+          let ansIndex = randomIndex+1
+          return {
+            question: question,
+            answer: ansIndex,
+            options: options,
+            type: "multipleChoice"
+          }
+        }
+        return mixedFractionAddSub()
+      }
+      
   }
 
   export default questionGenerator

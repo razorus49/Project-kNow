@@ -53,7 +53,7 @@ const TopicSelection = ({route, navigation}) => {
             if(question.function!= "noFunction"){
                 console.log("condition met")
                 val = questionGenerator[question["function"]]() 
-                console.log('val received')
+                console.log('val received', val)
             }
 
             QuestionList.push(val) 

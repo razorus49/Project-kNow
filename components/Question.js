@@ -7,7 +7,7 @@ import OptionList from './OptionList';
 const Options = ({text, id, selected, onSelect}) => (
     <View >
       <TouchableOpacity style={styles.item} onPress={()=> onSelect(id)}>
-        <Text style={{color: selected? '#44B0F2' : '#b191ef' }}> {text} selected: {JSON.stringify(selected)} id:{id}</Text>
+        <Text style={{color: selected? '#44B0F2' : '#000000' }}> {text} selected: {JSON.stringify(selected)} id:{id}</Text>
       </TouchableOpacity>
     </View>
   )
@@ -62,7 +62,7 @@ const TextInputQuestion = ({question, image, onAns, ans}) =>{
 const styles = StyleSheet.create({
 
     item: {
-      backgroundColor: '#f9c2ff',
+      backgroundColor: '#c2f0c9',
       padding: 10,
       marginVertical: 5,
       marginHorizontal: 1,
