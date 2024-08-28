@@ -16,14 +16,7 @@
                 "function": "noFunction"
             }
         ], 
-        "wordsPerMinute":[
-            {
-                "image": "",
-                "type":"multipleChoice",
-                "function":"wordsPerMinute"
-            }
-        ],
-        
+
         "分數的比較和加減":[
             {
                 "question": "1. 分數的比較和加減 - ans: 2",
@@ -59,14 +52,18 @@
             } 
         ],
         "小數除法及四則混合計算":[
+        
             {
-                "question": "小數除法及四則混合計算 - ans: 2",
-                "options": ["1","2","3","4"],
-                "image": "",
-                "type": "multipleChoice",
-                "answer": 2,
-                "function": "noFunction"
-            }   
+                "image":"",
+                "type":"multipleChoice",
+                "function":"wordsPerMinute"
+            },
+            {
+                "image":"",
+                "type":"multipleChoice",
+                "function":"factorsOfEquation"
+            }
+        
         ],
         "小數和分數互化":[
             {
@@ -97,6 +94,22 @@
                 "type": "multipleChoice",
                 "answer": 3,
                 "function": "noFunction"
+            }
+        ]
+    },
+    "Algebra":{
+        "簡化代數表達式":[
+            {
+                "image":"",
+                "type":"multipleChoice",
+                "function": "factorsOfEquation"
+            }
+        ],
+        "運用代數式表達以文字敍述和涉及未知量的運算和數量關係":[
+            {
+                "image":"",
+                "type":"multipleChoice",
+                "function":"wordsPerMinute"
             }
         ]
     }

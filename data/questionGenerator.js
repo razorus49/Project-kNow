@@ -1,5 +1,13 @@
 
+/*
+list of all subtopics
+const topics = {'Arithmetics': ["多位數", "分數的比較和加減", "分數除法及四則混合計算", "小數乘法", "小數除法及四則混合計算","小數和分數互化", "分數乘法"],
+    "Geometry": [ '三角形', '四邊形的面積', '立體圖形', '體積', '多邊形的麵積', '符合棒形圖', '圓', '立體的截面', '圓面積', '角和度', '容量和體積', '圓形圖',"軸對稱", '折線圖', '圓周' ],
+    "Statistics":['平均數', '百分數', '時間和速率', '統計圖的應用'],
+    "Algebra": ["運用英文字母表示數", "運用代數式表達以文字敍述和涉及未知量的運算和數量關係", "解簡易方程", "解涉及非整數係數或常數的簡易方程", "簡化代數表達式","運用方程解應用題"]
+}
 
+*/
 const questionGenerator = {
     multiDigitNumbers: function generateMultiDigitNumbers(){
         function getRandomInt(min, max) {
@@ -97,6 +105,7 @@ const questionGenerator = {
 
       // assigning random values to options array
       // and making sure no answers are repeated in the options array 
+      let flag=false
       do{
           flag = false;
           for (let i=0;i<4;++i) {
@@ -118,7 +127,7 @@ const questionGenerator = {
 
       return {question:question, options:options, answer:randomPos+1, type: "multipleChoice"}
     }
-    
+
 
     ,factorsOfEquation: function generateFactorsOfEquation () {
         function getRandomInt(min,max) {
@@ -129,14 +138,15 @@ const questionGenerator = {
         
         function divisibleResult(result) {
             let half = result/2;
-            let flag = false;
+            let flag2 = false;
             do {
                 let divisor1 = getRandomInt(2,half);
                 if (result%divisor1 == 0 && divisor1 != 2) {
+                    flag2 = true;
                     return divisor1;
-                    flag = true;
+
                 }
-            }while(!flag)
+            }while(!flag2)
         }
         
         let divisor1 = divisibleResult(result);
@@ -148,6 +158,7 @@ const questionGenerator = {
         let ansMin = (ans-half2);
         let ansMax = (ans+half2);
         
+        let flag=false
         do{
             flag = false;
             for (let i=0;i<4;++i) {
@@ -167,7 +178,7 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
         
-        return {question: question, options: options, answer: ans, type: "multipleChoice"}
+        return {question: question, options: options, answer: randomPos+1, type: "multipleChoice"}
     }
 
 
@@ -207,6 +218,7 @@ const questionGenerator = {
         let ansMin = (ans-half);
         let ansMax = (ans+half)
         
+        let flag=false
         do{
             flag = false;
             for (let i=0;i<4;++i) {
@@ -226,11 +238,11 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
         
-        return {question: question, options: options, answer: ans, type: "multipleChoice"}
+        return {question: question, options: options, answer: randomPos+1, type: "multipleChoice"}
     }
 
 
-    ,differentDenominatorFraction: function generateDifferentDenominatorFraction() {
+    ,differentDenominatorFractionWordProblem: function generateDifferentDenominatorFraction() {
         let foods = ["apples", "oranges", "bananas", "pears", "peaches", "carrots", "watermelons", "pizzas", "strawberries", "blueberries"];
         let chosenFood = foods[(Math.floor((Math.random() * (foods.length-1))+0))];
 
@@ -299,6 +311,7 @@ const questionGenerator = {
         let ansMin = ans-halfAns;
         let ansMax = ans+halfAns;
 
+        flag=false
         do{
             flag = false;
             for (let i=0;i<4;++i) {
@@ -318,7 +331,7 @@ const questionGenerator = {
         let randomPos = getRandomInt(0,3);
         options[randomPos] = ans;
 
-        return {question: question, options: options, answer: ans, type: "multipleChoice"}
+        return {question: question, options: options, answer: randomPos+1, type: "multipleChoice"}
     },
 
 
